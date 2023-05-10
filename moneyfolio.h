@@ -16,7 +16,7 @@ typedef struct{
 } Expense;
 
 int addIncome(Income *in);
-int addExpense(Expence *ex);
+int addExpense(Expense *ex);
 int addfIncome(Income *in);
 int addfExpense(Expense *ex);
 
