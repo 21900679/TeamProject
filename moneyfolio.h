@@ -6,29 +6,29 @@ typedef struct{
         Date d;
         char note[100];
         int price;
-        char category[3][20] = {"¿ù±Þ","ºÎ¼öÀÔ","¿ëµ·"};
-} Income;       // ¼öÀÔ
+        char category[3][20] = {"¿¿","¿¿¿","¿¿"};
+} Income;       // ¿¿
 typedef struct{
         Date d;
         char note[100];
         int price;
-        char category[5][20] = {"½Äºñ","±³Åë/Â÷·®","ÁÖ°Å/Åë½Å","¹®È­»ýÈ°","»ýÈ°¿ëÇ°"};
-} Expense;      // ÁöÃâ
+        char category[5][20] = {"¿¿","¿¿/¿¿","¿¿/¿¿","¿¿¿¿","¿¿¿¿"};
+} Expense;      // ¿¿
 
-int addIncome(Income *in);
-int addExpense(Expense *ex);
-int addfIncome(Income *in);
-int addfExpense(Expense *ex);
+int addIncome(Income *in);		// ¿¿¿¿ ¿¿
+int addExpense(Expense *ex);		// ¿¿¿¿ ¿¿
+int addfIncome(Income *in);		// ¿¿¿¿¿¿ ¿¿
+int addfExpense(Expense *ex);		// ¿¿¿¿¿¿ ¿¿
 
-void updateIncome(Income *in);
-void updateExpense(Expense *ex);
-int deleteIncome(Income *in);
-int deleteExpense(Expense *ex);
+void updateIncome(Income *in);		// ¿¿¿¿ ¿¿ 
+void updateExpense(Expense *ex);	// ¿¿¿¿ ¿¿
+int deleteIncome(Income *in); 		// ¿¿¿¿ ¿¿
+int deleteExpense(Expense *ex); 	// ¿¿¿¿ ¿¿
 
-void sumList(Income *in, Expense *ex);          // ÀÏº° ³»¿ª list + ÇÕ°è Ãâ·Â ±â´É
-int searchCategory(Income * in, Expense *ex);           // ÁöÃâ & ¼öÀÔ ºÐ·ùº° °Ë»ö ±â´É
-int searchIncome(Income *in);                   // ¼öÀÔ³»¿ª °Ë»ö ±â´É
-int serachExpense(Expense *ex);                 // ÁöÃâ³»¿ª °Ë»ö ±â´É
-void dayList(Income * in, Expense *ex);         // ÀÏÀÏ ³»¿ª list ±â´É
-void monthList(Income * in, Expense *ex);       // ¿ùº° ³»¿ª list ±â´É
-int save(Income * in, Expense *ex);             // ÀÏº° ³»¿ª list +  ÇÕ°è ÀúÀå±â´É
+void sumList(Income *in, Expense *ex);          // ¿¿ ¿¿ list + ¿¿ ¿¿ ¿¿
+int searchCategory(Income * in, Expense *ex);           // ¿¿ & ¿¿ ¿¿¿ ¿¿ ¿¿
+int searchIncome(Income *in);                   // ¿¿¿¿ ¿¿ ¿¿
+int serachExpense(Expense *ex);                 // ¿¿¿¿ ¿¿ ¿¿
+void dayList(Income * in, Expense *ex);         // ¿¿ ¿¿ list ¿¿
+void monthList(Income * in, Expense *ex);       // ¿¿ ¿¿ list ¿¿
+int save(Income * in, Expense *ex);             // ¿¿ ¿¿ list + ¿¿ ¿¿¿¿
