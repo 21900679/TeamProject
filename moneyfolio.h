@@ -6,13 +6,13 @@ typedef struct{
         Date d;
         char note[100];
         int price;
-        char category[3][20];
+        char category[20];
 } Income;       // 수입
 typedef struct{
         Date d;
         char note[100];
         int price;
-        char category[5][20];
+        char category[20];
 } Expense;      // 지출
 
 int addIncome(Income *in);		                  // 수입내역 추가
