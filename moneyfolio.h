@@ -35,4 +35,5 @@ int searchExpense(Expense *ex);                 // 지출내역 검색 기능
 void dayList(Income * in, Expense *ex);         // 일일 내역 list 기능
 void monthList(Income * in, Expense *ex);       // 월별 내역 list 기능
 int save(Income * in, Expense *ex);             // 일별 내역 list +  합계 저장기능
-int selectIE();                                 // 메뉴 고르는 기능
+int selectIE();                                 // 수입, 지출 고르는 기능
+int selectMenu();                               // 메뉴 고르는 기능
