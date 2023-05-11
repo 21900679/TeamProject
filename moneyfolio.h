@@ -15,9 +15,6 @@ typedef struct{
         char category[5][20];
 } Expense;      // 지출
 
-Income i = {.category = {"월급", "부수입", "용돈"}};
-Expense e = {.category = {"식비", "교통/차량", "주거/통신", "문화생활", "생활용품"}};
-
 int addIncome(Income *in);		                  // 수입내역 추가
 int addExpense(Expense *ex);		                // 지출내역 추가
 int addfIncome(Income *in);		                  // 고정수입내역 추가
