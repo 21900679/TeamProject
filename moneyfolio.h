@@ -7,32 +7,32 @@ typedef struct{
         char note[100];
         int price;
         char category[3][20];
-} Income;       // ¼öÀÔ
+} Income;       // ìˆ˜ì…
 typedef struct{
         Date d;
         char note[100];
         int price;
         char category[5][20];
-} Expense;      // ÁöÃâ
+} Expense;      // ì§€ì¶œ
 
-Income i = {.category = {"¿ù±Ş", "ºÎ¼öÀÔ", "¿ëµ·"}};
-Expense e = {.category = {"½Äºñ", "±³Åë/Â÷·®", "ÁÖ°Å/Åë½Å", "¹®È­»ıÈ°", "»ıÈ°¿ëÇ°"}};
+Income i = {.category = {"ì›”ê¸‰", "ë¶€ìˆ˜ì…", "ìš©ëˆ"}};
+Expense e = {.category = {"ì‹ë¹„", "êµí†µ/ì°¨ëŸ‰", "ì£¼ê±°/í†µì‹ ", "ë¬¸í™”ìƒí™œ", "ìƒí™œìš©í’ˆ"}};
 
-int addIncome(Income *in);		
-int addExpense(Expense *ex);		
-int addfIncome(Income *in);		
-int addfExpense(Expense *ex);		
+int addIncome(Income *in);		                  // ìˆ˜ì…ë‚´ì—­ ì¶”ê°€
+int addExpense(Expense *ex);		                // ì§€ì¶œë‚´ì—­ ì¶”ê°€
+int addfIncome(Income *in);		                  // ê³ ì •ìˆ˜ì…ë‚´ì—­ ì¶”ê°€
+int addfExpense(Expense *ex);		                // ê³ ì •ì§€ì¶œë‚´ì—­ ì¶”ê°€
 
-void updateIncome(Income *in);		
-void updateExpense(Expense *ex);	
-int deleteIncome(Income *in); 		
-int deleteExpense(Expense *ex); 	
+void updateIncome(Income *in);		              // ìˆ˜ì…ë‚´ì—­ ìˆ˜ì •
+void updateExpense(Expense *ex);	              // ì§€ì¶œë‚´ì—­ ìˆ˜ì •
+int deleteIncome(Income *in); 		              // ìˆ˜ì…ë‚´ì—­ ì‚­ì œ
+int deleteExpense(Expense *ex); 	              // ì§€ì¶œë‚´ì—­ ì‚­ì œ
 
-void sumList(Income *in, Expense *ex);          // ÀÏº° ³»¿ª list + ÇÕ°è Ãâ·Â ±â´É
-int searchCategory(Income * in, Expense *ex);           // ÁöÃâ & ¼öÀÔ ºĞ·ùº° °Ë»ö ±â´É
-int searchIncome(Income *in);                   // ¼öÀÔ³»¿ª °Ë»ö ±â´É
-int searchExpense(Expense *ex);                 // ÁöÃâ³»¿ª °Ë»ö ±â´É
-void dayList(Income * in, Expense *ex);         // ÀÏÀÏ ³»¿ª list ±â´É
-void monthList(Income * in, Expense *ex);       // ¿ùº° ³»¿ª list ±â´É
-int save(Income * in, Expense *ex);             // ÀÏº° ³»¿ª list +  ÇÕ°è ÀúÀå±â´É
-int selectIE();                                 // ¸Ş´º °í¸£´Â ±â´É
+void sumList(Income *in, Expense *ex);          // ì¼ë³„ ë‚´ì—­ list + í•©ê³„ ì¶œë ¥ ê¸°ëŠ¥
+int searchCategory(Income * in, Expense *ex);           // ì§€ì¶œ & ìˆ˜ì… ë¶„ë¥˜ë³„ ê²€ìƒ‰ ê¸°ëŠ¥
+int searchIncome(Income *in);                   // ìˆ˜ì…ë‚´ì—­ ê²€ìƒ‰ ê¸°ëŠ¥
+int searchExpense(Expense *ex);                 // ì§€ì¶œë‚´ì—­ ê²€ìƒ‰ ê¸°ëŠ¥
+void dayList(Income * in, Expense *ex);         // ì¼ì¼ ë‚´ì—­ list ê¸°ëŠ¥
+void monthList(Income * in, Expense *ex);       // ì›”ë³„ ë‚´ì—­ list ê¸°ëŠ¥
+int save(Income * in, Expense *ex);             // ì¼ë³„ ë‚´ì—­ list +  í•©ê³„ ì €ì¥ê¸°ëŠ¥
+int selectIE();                                 // ë©”ë‰´ ê³ ë¥´ëŠ” ê¸°ëŠ¥
