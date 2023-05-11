@@ -51,6 +51,6 @@ int main(void){
         else if(menu == 8)  dayList(i, e);
         else if(menu == 9)  monthList(i, e);
     }
-    printf("=> Á¾·áµÊ!\n");
+    printf("=> ì¢…ë£Œë¨!\n");
     return 0;
 }
