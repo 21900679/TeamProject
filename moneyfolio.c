@@ -2,8 +2,66 @@
 #include <string.h>
 #include "moneyfolio.h"
 
-int addIncome(Income *in);
-int addExpense(Expense *ex);
+int addIncome(Income *in){          // 수입내역 
+    int month, day;
+    char input_date[5] = "";
+    char month_str[3] = "";
+    char day_str[3] = "";
+    printf("월을 입력하세요: ");
+    scanf("%d", &month);
+    printf("일을 입력하세요: ");
+    scanf("%d", &day);
+    if (month < 10)
+        sprintf(month_str, "0%d", month);
+    else
+        sprintf(month_str, "%d", month);
+    if (day < 10)
+        sprintf(day_str, "0%d", day);
+    else
+        sprintf(day_str, "%d", day);
+    strcat(input_date, month_str);
+    strcat(input_date, day_str);
+    strcpy(in->date, input_date);
+    printf("금액을 입력하세요: ");
+    scanf("%d", &in->price);
+    printf("수입에 대한 내역을 입력하세요: ");
+    getchar();
+    fgets(in->note, 100, stdin);
+    in->note[strlen(in->note)-1] = '\0';
+    // 수입 분류 리스트 print 하기
+    printf("수입에 대한 분류를 선택하세요: ");
+    scanf("%d", &(in->category));
+}
+int addExpense(Expense *ex){        // 지출내역 
+    int month, day;
+    char input_date[5] = "";
+    char month_str[3] = "";
+    char day_str[3] = "";
+    printf("월을 입력하세요: ");
+    scanf("%d", &month);
+    printf("일을 입력하세요: ");
+    scanf("%d", &day);
+    if (month < 10)
+        sprintf(month_str, "0%d", month);
+    else
+        sprintf(month_str, "%d", month);
+    if (day < 10)
+        sprintf(day_str, "0%d", day);
+    else
+        sprintf(day_str, "%d", day);
+    strcat(input_date, month_str);
+    strcat(input_date, day_str);
+    strcpy(ex->date, input_date);
+    printf("금액을 입력하세요: ");
+    scanf("%d", &ex->price);
+    printf("지출에 대한 내역을 입력하세요: ");
+    getchar();
+    fgets(ex->note, 100, stdin);
+    ex->note[strlen(ex->note)-1] = '\0';
+    // 지출 분류 리스트 print 하기
+    printf("지출에 대한 분류를 선택하세요: ");
+    scanf("%d", &ex->category);
+}
 int addfIncome(Income *in);
 int addfExpense(Expense *ex);
 
