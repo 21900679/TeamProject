@@ -32,7 +32,7 @@ int main(void){
             if(IE == 1)
                 searchIncome(i, countIn);
             else if(IE == 2)
-                searchExpense(e);
+                searchExpense(e, countEx);
         }
         else if(menu == 5)
             searchCategory(i,e);
