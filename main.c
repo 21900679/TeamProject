@@ -2,8 +2,7 @@
 #include "moneyfolio.h"
 
 int main(void){
-    Income *i[100];
-    Expense *e[100];
+    Moneyfolio *m[200];
     int menu;
     int IE;
     int countIn = 0;
@@ -12,7 +11,7 @@ int main(void){
     while(1){
         menu = selectMenu();
         if(menu == 0) break;
-        if(menu == 1)   sumList(i, e);
+        if(menu == 1)   sumList(m, countIn + countEx);
         else if(menu == 2){
             IE = selectIE();
             if(IE == 1)
@@ -30,16 +29,16 @@ int main(void){
         else if(menu == 4){
             IE = selectIE();
             if(IE == 1)
-                searchIncome(i, countIn);
+                searchIncome(m, countIn + countEx);
             else if(IE == 2)
-                searchExpense(e, countEx);
+                searchExpense(m, countIn + countEx);
         }
         else if(menu == 5){
             IE = selectIE();
             if(IE == 1)
-                searchCateIn(i, countIn);
+                searchCateIn(m, countIn + countEx);
             else if(IE == 2)
-                searchCateEx(e, countEx);
+                searchCateEx(m, countIn + countEx);
         }
         else if(menu == 6){
             IE = selectIE();
@@ -55,9 +54,9 @@ int main(void){
             else if(IE == 2)
                 deleteExpense(e);
         }
-        else if(menu == 8)  dayList(i, e);
-        else if(menu == 9)  monthList(i, e);
-        else if(menu == 10) save(i, e);
+        else if(menu == 8)  dayList(m, countIn + countEx);
+        else if(menu == 9)  monthList(m, countIn + countEx);
+        else if(menu == 10) save(m, countIn + countEx);
     }
     printf("=> 종료됨!\n");
     return 0;
