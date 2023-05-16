@@ -2,7 +2,7 @@
 #include <string.h>
 #include "moneyfolio.h"
 
-int addIncome(Income *in){          // 수입내역 
+int addIncome(Moneyfolio *mf){          // 수입내역 
     int month, day;
     char input_date[5] = "";
     char month_str[3] = "";
@@ -21,18 +21,19 @@ int addIncome(Income *in){          // 수입내역
         sprintf(day_str, "%d", day);
     strcat(input_date, month_str);
     strcat(input_date, day_str);
-    strcpy(in->date, input_date);
+    strcpy(mf->date, input_date);
     printf("금액을 입력하세요: ");
-    scanf("%d", &in->price);
+    scanf("%d", &mf->price);
     printf("수입에 대한 내역을 입력하세요: ");
     getchar();
-    fgets(in->note, 100, stdin);
-    in->note[strlen(in->note)-1] = '\0';
+    fgets(mf->note, 100, stdin);
+    mf->note[strlen(mf->note)-1] = '\0';
     // 수입 분류 리스트 print 하기
     printf("수입에 대한 분류를 선택하세요: ");
-    scanf("%d", &(in->category));
+    scanf("%d", &(mf->category));
+    mf->IE = 0;
 }
-int addExpense(Expense *ex){        // 지출내역 
+int addExpense(Moneyfolio *mf){        // 지출내역 
     int month, day;
     char input_date[5] = "";
     char month_str[3] = "";
@@ -51,24 +52,25 @@ int addExpense(Expense *ex){        // 지출내역
         sprintf(day_str, "%d", day);
     strcat(input_date, month_str);
     strcat(input_date, day_str);
-    strcpy(ex->date, input_date);
+    strcpy(mf->date, input_date);
     printf("금액을 입력하세요: ");
-    scanf("%d", &ex->price);
+    scanf("%d", &mf->price);
     printf("지출에 대한 내역을 입력하세요: ");
     getchar();
-    fgets(ex->note, 100, stdin);
-    ex->note[strlen(ex->note)-1] = '\0';
+    fgets(mf->note, 100, stdin);
+    mf->note[strlen(mf->note)-1] = '\0';
     // 지출 분류 리스트 print 하기
     printf("지출에 대한 분류를 선택하세요: ");
-    scanf("%d", &ex->category);
+    scanf("%d", &mf->category);
+    mf->IE = 1;
 }
-int addfIncome(Income *in);
-int addfExpense(Expense *ex);
+int addfIncome(Moneyfolio *mf);
+int addfExpense(Moneyfolio *mf);
 
-void updateIncome(Income *in);
-void updateExpense(Expense *ex);
-int deleteIncome(Income *in);
-int deleteExpense(Expense *ex);
+void updateIncome(Moneyfolio *mf);
+void updateExpense(Moneyfolio *mf);
+int deleteIncome(Moneyfolio *mf);
+int deleteExpense(Moneyfolio *mf);
 
 void sumList(Income *in[], Expense *ex[]);
 
@@ -212,4 +214,7 @@ int selectMenu(){
     printf("원하는 메뉴를 선택하시오. ");
     scanf("%d", &menu);
     return menu;
+}
+int compare_date(const void* first, const void* second){
+    return strcmp(((Moneyfolio*)first)->date, ((Moneyfolio*)second)->date);
 }
