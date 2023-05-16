@@ -24,13 +24,16 @@ void updateExpense(Expense *ex);	              // 지출내역 수정
 int deleteIncome(Income *in); 		              // 수입내역 삭제
 int deleteExpense(Expense *ex); 	              // 지출내역 삭제
 
-void sumList(Income *in[], Expense *ex[]);          // 일별 내역 list + 합계 출력 기능
-int searchCategory(Income *in[], Expense *ex[]);           // 지출 & 수입 분류별 검색 기능
-int searchIncome(Income *in[], int countIn);                   // 수입내역 검색 기능
-int searchExpense(Expense *ex[], int countEx);                 // 지출내역 검색 기능
+void searchCateEx(Expense *ex[], int countEx);           // 지출 분류별 검색 기능
+void searchCateIn(Income *in[], int countIn);            // 수입 분류별 검색 기능
+void searchIncome(Income *in[], int countIn);                   // 수입내역 검색 기능
+void searchExpense(Expense *ex[], int countEx);                 // 지출내역 검색 기능
+
 void dayList(Income *in[], Expense *ex[]);         // 일일 내역 list 기능
 void monthList(Income *in[], Expense *ex[]);       // 월별 내역 list 기능
+void sumList(Income *in[], Expense *ex[]);          // 일별 내역 list + 합계 출력 기능
 int save(Income *in[], Expense *ex[]);             // 일별 내역 list +  합계 저장기능
+
 int selectIE();                                 // 수입, 지출 고르는 기능
 int selectMenu();                               // 메뉴 고르는 기능
 int compare_date(const void* first, const void* second);    // 날짜 순서로 sorting하는 compare()
