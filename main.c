@@ -6,6 +6,8 @@ int main(void){
     Expense *e[100];
     int menu;
     int IE;
+    int countIn = 0;
+    int countEx = 0;
 
     while(1){
         menu = selectMenu();
@@ -28,7 +30,7 @@ int main(void){
         else if(menu == 4){
             IE = selectIE();
             if(IE == 1)
-                searchIncome(i);
+                searchIncome(i, countIn);
             else if(IE == 2)
                 searchExpense(e);
         }
