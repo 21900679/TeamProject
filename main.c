@@ -34,8 +34,13 @@ int main(void){
             else if(IE == 2)
                 searchExpense(e, countEx);
         }
-        else if(menu == 5)
-            searchCategory(i,e);
+        else if(menu == 5){
+            IE = selectIE();
+            if(IE == 1)
+                searchCateIn(i, countIn);
+            else if(IE == 2)
+                searchCateEx(e, countEx);
+        }
         else if(menu == 6){
             IE = selectIE();
             if(IE == 1)
