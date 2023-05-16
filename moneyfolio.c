@@ -36,9 +36,34 @@ int searchIncome(Income *in[], int countIn){         // 수입내역 검색 기�
         pmonth = month;
         pday = day;
     }
+    printf("----------------------------------------\n");
 }  
 
-int searchExpense(Expense *ex[]);
+int searchExpense(Expense *ex[], int countEx){         // 지출내역 검색 기능
+    char serach[100];
+    int month = 0;
+    int day = 0;
+    int pmonth = 0;
+    int pday = 0;
+    printf("검색하실 내용을 입력해 주세요. ");
+    scanf("%s", serach);
+
+    for(int i = 0; i < countEx; i++){
+        month = ex[i]->date[0] * 10 + ex[i]->date[1];
+        day = ex[i]->date[2] * 10 + ex[i]->date[3];
+        if(strstr(ex[i]->note, serach) != NULL){
+            if(pmonth != month)
+                printf("%d월 %d일-------------------------------\n", month, day);
+            printf("%s %s %d\n", InCate[ex[i]->category], ex[i]->note, ex[i]->price);
+            if(pmonth != month)
+                printf("----------------------------------------\n");
+        }
+        pmonth = month;
+        pday = day;
+    }
+    printf("----------------------------------------\n");
+}
+
 void dayList(Income *in[], Expense *ex[]);
 void monthList(Income *in[], Expense *ex[]);
 int save(Income *in[], Expense *ex[]);
