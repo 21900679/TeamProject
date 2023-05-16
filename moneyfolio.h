@@ -1,11 +1,11 @@
 typedef struct{
-        char date[4];
-        char price;
+        char date[5];
+        int price;
         char note[100];
         int category;
 } Income;       // 수입
 typedef struct{
-        char date[4];
+        char date[5];
         int price;
         char note[100];
         int category;
