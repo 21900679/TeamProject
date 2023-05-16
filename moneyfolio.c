@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "moneyfolio.h"
 
 int addIncome(Moneyfolio *mf){          // 수입내역 
@@ -72,26 +73,58 @@ void updateExpense(Moneyfolio *mf);
 int deleteIncome(Moneyfolio *mf);
 int deleteExpense(Moneyfolio *mf);
 
-void sumList(Income *in[], Expense *ex[]);
+void sumList(Moneyfolio *mf[], int total){      // 일별 내역 list + 합계 출력 기능
+    int month = 0;
+    int day = 0;
+    int pmonth = 0;
+    int pday = 0;
+    int sum = 0;
 
-void searchCateIn(Income * in[], int countIn){       // 수입 분류별 검색 기능
-    char serach[100];
+    time_t t1;
+    struct tm* ct;
+    t1 = time(NULL);
+    ct = localtime(&t1);
+
+    month = mf[0]->date[0] * 10 + mf[0]->date[1];
+    for(int i = 0; i < total, ct->tm_mon + 1 == month; i++){
+        month = mf[i]->date[0] * 10 + mf[i]->date[1];
+        day = mf[i]->date[2] * 10 + mf[i]->date[3];
+        if(pmonth != month || pday != day)
+            printf("%d월 %d일-------------------------------\n", month, day);
+        if(mf[i]->IE == 0){
+            printf("%s %s %d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            sum += mf[i]->price;
+        }
+        else{
+            printf("%s %s %d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            sum -= mf[i]->price;
+        }
+        if(pmonth != month || pday != day)
+            printf("----------------------------------------\n");
+        pmonth = month;
+        pday = day;
+    }
+    printf("---------------------------------- 합계 : %d ------\n", sum);
+}
+
+void searchCateIn(Moneyfolio *mf[], int total){       // 수입 분류별 검색 기능
+    char search[100];
     int month = 0;
     int day = 0;
     int pmonth = 0;
     int pday = 0;
     while(1){
         printf("검색하실 수입 category(월급, 부수입, 용돈)를 입력해 주세요. ");
-        scanf("%s", serach);
-        if(strcmp("월급", serach) == 0 || strcmp("부수입", serach) == 0 || strcmp("용돈", serach) == 0){
-            for(int i = 0; i < countIn; i++){
-                month = in[i]->date[0] * 10 + in[i]->date[1];
-                day = in[i]->date[2] * 10 + in[i]->date[3];
-                if(strcmp(InCate[in[i]->category], serach) == 0){
-                    if(pmonth != month)
+        scanf("%s", search);
+        if(strcmp("월급", search) == 0 || strcmp("부수입", search) == 0 || strcmp("용돈", search) == 0){
+            for(int i = 0; i < total; i++){
+                month = mf[i]->date[0] * 10 + mf[i]->date[1];
+                day = mf[i]->date[2] * 10 + mf[i]->date[3];
+                if((strcmp(InCate[mf[i]->category], search) == 0) && (mf[i]->IE == 0)){
+                    if(pmonth != month || pday != day)
                         printf("%d월 %d일-------------------------------\n", month, day);
-                    printf("%s %s %d\n", InCate[in[i]->category], in[i]->note, in[i]->price);
-                    if(pmonth != month)
+                    printf("%s %s %d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+                    if(pmonth != month || pday != day)
                         printf("----------------------------------------\n");
                 }
                 pmonth = month;
@@ -106,24 +139,24 @@ void searchCateIn(Income * in[], int countIn){       // 수입 분류별 검색 
     }
 }
 
-void searchCateEx(Expense *ex[], int countEx){       // 지출 분류별 검색 기능
-    char serach[100];
+void searchCateEx(Moneyfolio *mf[], int total){       // 지출 분류별 검색 기능
+    char search[100];
     int month = 0;
     int day = 0;
     int pmonth = 0;
     int pday = 0;
     while(1){
         printf("검색하실 수입 category(식비, 생활용품, 교통/차량)를 입력해 주세요. ");
-        scanf("%s", serach);
-        if(strcmp("식비", serach) == 0 || strcmp("생활용품", serach) == 0 || strcmp("교통/차량", serach) == 0){
-            for(int i = 0; i < countEx; i++){
-                month = ex[i]->date[0] * 10 + ex[i]->date[1];
-                day = ex[i]->date[2] * 10 + ex[i]->date[3];
-                if(strcmp(ExCate[ex[i]->category], serach) == 0){
-                    if(pmonth != month)
+        scanf("%s", search);
+        if(strcmp("식비", search) == 0 || strcmp("생활용품", search) == 0 || strcmp("교통/차량", search) == 0){
+            for(int i = 0; i < total; i++){
+                month = mf[i]->date[0] * 10 + mf[i]->date[1];
+                day = mf[i]->date[2] * 10 + mf[i]->date[3];
+                if(strcmp(ExCate[mf[i]->category], search) == 0){
+                    if(pmonth != month || pday != day)
                         printf("%d월 %d일-------------------------------\n", month, day);
-                    printf("%s %s %d\n", ExCate[ex[i]->category], ex[i]->note, ex[i]->price);
-                    if(pmonth != month)
+                    printf("%s %s %d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+                    if(pmonth != month || pday != day)
                         printf("----------------------------------------\n");
                 }
                 pmonth = month;
@@ -138,48 +171,23 @@ void searchCateEx(Expense *ex[], int countEx){       // 지출 분류별 검색 
     }
 }
 
-void searchIncome(Income *in[], int countIn){         // 수입내역 검색 기능
-    char serach[100];
+void searchIncome(Moneyfolio *mf[], int total){         // 수입내역 검색 기능
+    char search[100];
     int month = 0;
     int day = 0;
     int pmonth = 0;
     int pday = 0;
     printf("검색하실 내용을 입력해 주세요. ");
-    scanf("%s", serach);
+    scanf("%s", search);
 
-    for(int i = 0; i < countIn; i++){
-        month = in[i]->date[0] * 10 + in[i]->date[1];
-        day = in[i]->date[2] * 10 + in[i]->date[3];
-        if(strstr(in[i]->note, serach) != NULL){
-            if(pmonth != month)
+    for(int i = 0; i < total; i++){
+        month = mf[i]->date[0] * 10 + mf[i]->date[1];
+        day = mf[i]->date[2] * 10 + mf[i]->date[3];
+        if((strstr(mf[i]->note, search) != NULL) && (mf[i]->IE == 0)){
+            if(pmonth != month || pday != day)
                 printf("%d월 %d일-------------------------------\n", month, day);
-            printf("%s %s %d\n", InCate[in[i]->category], in[i]->note, in[i]->price);
-            if(pmonth != month)
-                printf("----------------------------------------\n");
-        }
-        pmonth = month;
-        pday = day;
-    }
-    printf("----------------------------------------\n");
-}  
-
-void searchExpense(Expense *ex[], int countEx){         // 지출내역 검색 기능
-    char serach[100];
-    int month = 0;
-    int day = 0;
-    int pmonth = 0;
-    int pday = 0;
-    printf("검색하실 내용을 입력해 주세요. ");
-    scanf("%s", serach);
-
-    for(int i = 0; i < countEx; i++){
-        month = ex[i]->date[0] * 10 + ex[i]->date[1];
-        day = ex[i]->date[2] * 10 + ex[i]->date[3];
-        if(strstr(ex[i]->note, serach) != NULL){
-            if(pmonth != month)
-                printf("%d월 %d일-------------------------------\n", month, day);
-            printf("%s %s %d\n", ExCate[ex[i]->category], ex[i]->note, ex[i]->price);
-            if(pmonth != month)
+            printf("%s %s %d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            if(pmonth != month || pday != day)
                 printf("----------------------------------------\n");
         }
         pmonth = month;
@@ -188,15 +196,125 @@ void searchExpense(Expense *ex[], int countEx){         // 지출내역 검색 �
     printf("----------------------------------------\n");
 }
 
-void dayList(Income *in[], Expense *ex[]);
-void monthList(Income *in[], Expense *ex[]);
-int save(Income *in[], Expense *ex[]);
+void searchExpense(Moneyfolio *mf[], int total){         // 지출내역 검색 기능
+    char search[100];
+    int month = 0;
+    int day = 0;
+    int pmonth = 0;
+    int pday = 0;
+    printf("검색하실 내용을 입력해 주세요. ");
+    scanf("%s", search);
+
+    for(int i = 0; i < total; i++){
+        month = mf[i]->date[0] * 10 + mf[i]->date[1];
+        day = mf[i]->date[2] * 10 + mf[i]->date[3];
+        if((strstr(mf[i]->note, search) != NULL) && (mf[i]->IE == 1)){
+            if(pmonth != month || pday != day)
+                printf("%d월 %d일-------------------------------\n", month, day);
+            printf("%s %s %d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            if(pmonth != month || pday != day)
+                printf("----------------------------------------\n");
+        }
+        pmonth = month;
+        pday = day;
+    }
+    printf("----------------------------------------\n");
+}
+
+void dayList(Moneyfolio *mf[], int total){     // 일일 내역 list
+    int month = 0;
+    int day = 0;
+    int pmonth = 0;
+    int pday = 0;
+
+    time_t t1;
+    struct tm* ct;
+    t1 = time(NULL);
+    ct = localtime(&t1);
+
+    month = mf[0]->date[0] * 10 + mf[0]->date[1];
+    for(int i = 0; i < total, ct->tm_mon + 1 == month; i++){
+        month = mf[i]->date[0] * 10 + mf[i]->date[1];
+        day = mf[i]->date[2] * 10 + mf[i]->date[3];
+        if(pmonth != month || pday != day)
+            printf("%d월 %d일-------------------------------\n", month, day);
+        if(mf[i]->IE == 0)
+            printf("%s %s %d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+        else
+            printf("%s %s %d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+        if(pmonth != month || pday != day)
+            printf("----------------------------------------\n");
+        pmonth = month;
+        pday = day;
+    }
+    printf("----------------------------------------\n");
+}
+
+void monthList(Moneyfolio *mf[], int total){
+    int month = 0;
+    int day = 0;
+    int pmonth = 0;
+    int pday = 0;
+
+    for(int i = 0; i < total; i++){
+        month = mf[i]->date[0] * 10 + mf[i]->date[1];
+        day = mf[i]->date[2] * 10 + mf[i]->date[3];
+        if(month != pmonth)
+            printf("%d월-------------------------------\n", month);
+        if(mf[i]->IE == 0)
+            printf("%d일 %s %s %d\n", day, InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+        else
+            printf("%d일 %s %s %d\n", day, ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+        pmonth = month;
+        pday = day;
+    }
+    printf("----------------------------------------\n");
+}
+
+void save(Moneyfolio *mf[], int total){
+    int month = 0;
+    int day = 0;
+    int pmonth = 0;
+    int pday = 0;
+    int sum = 0;
+
+    time_t t1;
+    struct tm* ct;
+    t1 = time(NULL);
+    ct = localtime(&t1);
+
+    FILE *file = fopen("moneyfolio.txt", "w");
+
+    month = mf[0]->date[0] * 10 + mf[0]->date[1];
+    for(int i = 0; i < total, ct->tm_mon + 1 == month; i++){
+        month = mf[i]->date[0] * 10 + mf[i]->date[1];
+        day = mf[i]->date[2] * 10 + mf[i]->date[3];
+        if(pmonth != month || pday != day)
+            fprintf(file, "%d월 %d일-------------------------------\n", month, day);
+        if(mf[i]->IE == 0){
+            fprintf(file, "%s %s %d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            sum += mf[i]->price;
+        }
+        else{
+            fprintf(file, "%s %s %d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            sum -= mf[i]->price;
+        }
+        if(pmonth != month || pday != day)
+            fprintf(file, "----------------------------------------\n");
+        pmonth = month;
+        pday = day;
+    }
+    fprintf(file, "---------------------------------- 합계 : %d ------\n", sum);
+    fclose(file);
+}
+
 int selectIE(){
     int IE;
     printf("수입(1), 지출(2)을 선택해주세요. ");
     scanf("%d", &IE);
     return IE;
 }
+
 int selectMenu(){
     int menu;
     printf("┌────────── MoneyFolio ─────────────┐\n");
@@ -215,6 +333,7 @@ int selectMenu(){
     scanf("%d", &menu);
     return menu;
 }
+
 int compare_date(const void* first, const void* second){
     return strcmp(((Moneyfolio*)first)->date, ((Moneyfolio*)second)->date);
 }
