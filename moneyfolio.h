@@ -1,18 +1,14 @@
 typedef struct{
-        int month;
-        int day;
-} Date;
-typedef struct{
-        Date d;
+        char date[4];
+        char price;
         char note[100];
-        int price;
-        char category[20];
+        int category;
 } Income;       // 수입
 typedef struct{
-        Date d;
-        char note[100];
+        char date[4];
         int price;
-        char category[20];
+        char note[100];
+        int category;
 } Expense;      // 지출
 
 int addIncome(Income *in);		                  // 수입내역 추가
