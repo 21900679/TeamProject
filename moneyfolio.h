@@ -30,3 +30,4 @@ void monthList(Income *in[], Expense *ex[]);       // 월별 내역 list 기능
 int save(Income *in[], Expense *ex[]);             // 일별 내역 list +  합계 저장기능
 int selectIE();                                 // 수입, 지출 고르는 기능
 int selectMenu();                               // 메뉴 고르는 기능
+int compare_date(const void* first, const void* second);    // 날짜 순서로 sorting하는 compare()
