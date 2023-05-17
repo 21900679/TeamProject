@@ -15,16 +15,16 @@ int main(void){
         else if(menu == 2){
             IE = selectIE();
             if(IE == 1)
-                addIncome(i);
+                addIncome(m);
             else if(IE == 2)
-                addExpense(e);
+                addExpense(m);
         }
         else if(menu == 3){
             IE = selectIE();
             if(IE == 1)
-                addfIncome(i);
+                addfIncome(m);
             else if(IE == 2)
-                addfExpense(e);
+                addfExpense(m);
         }
         else if(menu == 4){
             IE = selectIE();
@@ -43,16 +43,12 @@ int main(void){
         else if(menu == 6){
             IE = selectIE();
             if(IE == 1)
-                updateIncome(i);
+                updateIncome(m);
             else if(IE == 2)
-                updateExpense(e);
+                updateExpense(m);
         }
         else if(menu == 7){
-            IE = selectIE();
-            if(IE == 1)
-                deleteIncome(i);
-            else if(IE == 2)
-                deleteExpense(e);
+            deleteIE(m);
         }
         else if(menu == 8)  dayList(m, countIn + countEx);
         else if(menu == 9)  monthList(m, countIn + countEx);
