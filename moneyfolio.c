@@ -189,7 +189,9 @@ void searchIncome(Moneyfolio *mf[], int total){         // 수입내역 검색 �
     int pmonth = 0;
     int pday = 0;
     printf("검색하실 내용을 입력해 주세요. ");
-    scanf("%s", search);
+    fflush(stdin);
+    fgets(search, 100, stdin);
+    search[strlen(search)-1] = '\0';
 
     for(int i = 0; i < total; i++){
         month = mf[i]->date[0] * 10 + mf[i]->date[1];
@@ -214,7 +216,9 @@ void searchExpense(Moneyfolio *mf[], int total){         // 지출내역 검색 
     int pmonth = 0;
     int pday = 0;
     printf("검색하실 내용을 입력해 주세요. ");
-    scanf("%s", search);
+    fflush(stdin);
+    fgets(search, 100, stdin);
+    search[strlen(search)-1] = '\0';
 
     for(int i = 0; i < total; i++){
         month = mf[i]->date[0] * 10 + mf[i]->date[1];
