@@ -3,9 +3,9 @@
 #include <time.h>
 #include "moneyfolio.h"
 
-int addIncome(Moneyfolio *mf){          // 수입내역 
+void getDate(Moneyfolio *mf){           // Date 
     int month, day;
-    char input_date[5] = "";
+    char input_date[6] = "";
     char month_str[3] = "";
     char day_str[3] = "";
     printf("월을 입력하세요: ");
@@ -23,6 +23,9 @@ int addIncome(Moneyfolio *mf){          // 수입내역
     strcat(input_date, month_str);
     strcat(input_date, day_str);
     strcpy(mf->date, input_date);
+}
+int addIncome(Moneyfolio *mf){          // 수입내역 
+    getDate(mf);
     printf("금액을 입력하세요: ");
     scanf("%d", &mf->price);
     printf("수입에 대한 내역을 입력하세요: ");
@@ -35,25 +38,7 @@ int addIncome(Moneyfolio *mf){          // 수입내역
     mf->IE = 0;
 }
 int addExpense(Moneyfolio *mf){        // 지출내역 
-    int month, day;
-    char input_date[5] = "";
-    char month_str[3] = "";
-    char day_str[3] = "";
-    printf("월을 입력하세요: ");
-    scanf("%d", &month);
-    printf("일을 입력하세요: ");
-    scanf("%d", &day);
-    if (month < 10)
-        sprintf(month_str, "0%d", month);
-    else
-        sprintf(month_str, "%d", month);
-    if (day < 10)
-        sprintf(day_str, "0%d", day);
-    else
-        sprintf(day_str, "%d", day);
-    strcat(input_date, month_str);
-    strcat(input_date, day_str);
-    strcpy(mf->date, input_date);
+    getDate(mf);
     printf("금액을 입력하세요: ");
     scanf("%d", &mf->price);
     printf("지출에 대한 내역을 입력하세요: ");
@@ -68,10 +53,36 @@ int addExpense(Moneyfolio *mf){        // 지출내역
 int addfIncome(Moneyfolio *mf);
 int addfExpense(Moneyfolio *mf);
 
-void updateIncome(Moneyfolio *mf);
-void updateExpense(Moneyfolio *mf);
-int deleteIncome(Moneyfolio *mf);
-int deleteExpense(Moneyfolio *mf);
+void updateIncome(Moneyfolio *mf){
+    getDate(mf);
+    printf("금액을 입력하세요: ");
+    scanf("%d", &mf->price);
+    printf("수입에 대한 내역을 입력 해 주세요: ");
+    getchar();
+    fgets(mf->note, 100, stdin);
+    mf->note[strlen(mf->note)-1] = '\0';
+    // 분류 리스트 print 하기
+    printf("분류를 선택하세요: ");
+    scanf("%d", &(mf->category));
+}
+void updateExpense(Moneyfolio *mf){
+    getDate(mf);
+    printf("금액을 입력하세요: ");
+    scanf("%d", &mf->price);
+    printf("수입에 대한 내역을 입력 해 주세요: ");
+    getchar();
+    fgets(mf->note, 100, stdin);
+    mf->note[strlen(mf->note)-1] = '\0';
+    // 분류 리스트 print 하기
+    printf("분류를 선택하세요: ");
+    scanf("%d", &(mf->category));
+}
+int deleteIE(Moneyfolio *mf){               // 내역 삭제
+    mf->date[0] = '\0';
+    mf->price = -1;
+    mf->note[0] = '\0';
+    mf->category = -1;
+}
 
 void sumList(Moneyfolio *mf[], int total){      // 일별 내역 list + 합계 출력 기능
     int month = 0;
