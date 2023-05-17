@@ -17,8 +17,7 @@ int addfExpense(Moneyfolio *mf);                // 고정지출내역 추가
 
 void updateIncome(Moneyfolio *mf);              // 수입내역 수정
 void updateExpense(Moneyfolio *mf);             // 지출내역 수정
-int deleteIncome(Moneyfolio *mf);               // 수입내역 삭제
-int deleteExpense(Moneyfolio *mf);              // 지출내역 삭제
+int deleteIE(Moneyfolio *mf);                   // 내역 삭제
 
 void searchCateEx(Moneyfolio *mf[], int total);               // 지출 분류별 검색 기능
 void searchCateIn(Moneyfolio *mf[], int total);               // 수입 분류별 검색 기능
