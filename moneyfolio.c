@@ -98,6 +98,8 @@ void sumList(Moneyfolio *mf[], int total){      // 일별 내역 list + 합계 �
 
     month = mf[0]->date[0] * 10 + mf[0]->date[1];
     for(int i = 0; i < total, ct->tm_mon + 1 == month; i++){
+        if(mf[i]->price == -1)
+            continue;
         month = mf[i]->date[0] * 10 + mf[i]->date[1];
         day = mf[i]->date[2] * 10 + mf[i]->date[3];
         if(pmonth != month || pday != day)
@@ -129,6 +131,8 @@ void searchCateIn(Moneyfolio *mf[], int total){       // 수입 분류별 검색
         scanf("%s", search);
         if(strcmp("월급", search) == 0 || strcmp("부수입", search) == 0 || strcmp("용돈", search) == 0){
             for(int i = 0; i < total; i++){
+                if(mf[i]->price == -1)
+                    continue;
                 month = mf[i]->date[0] * 10 + mf[i]->date[1];
                 day = mf[i]->date[2] * 10 + mf[i]->date[3];
                 if((strcmp(InCate[mf[i]->category], search) == 0) && (mf[i]->IE == 0)){
@@ -161,6 +165,8 @@ void searchCateEx(Moneyfolio *mf[], int total){       // 지출 분류별 검색
         scanf("%s", search);
         if(strcmp("식비", search) == 0 || strcmp("생활용품", search) == 0 || strcmp("교통/차량", search) == 0){
             for(int i = 0; i < total; i++){
+                if(mf[i]->price == -1)
+                    continue;
                 month = mf[i]->date[0] * 10 + mf[i]->date[1];
                 day = mf[i]->date[2] * 10 + mf[i]->date[3];
                 if(strcmp(ExCate[mf[i]->category], search) == 0){
@@ -194,6 +200,8 @@ void searchIncome(Moneyfolio *mf[], int total){         // 수입내역 검색 �
     search[strlen(search)-1] = '\0';
 
     for(int i = 0; i < total; i++){
+        if(mf[i]->price == -1)
+            continue;
         month = mf[i]->date[0] * 10 + mf[i]->date[1];
         day = mf[i]->date[2] * 10 + mf[i]->date[3];
         if((strstr(mf[i]->note, search) != NULL) && (mf[i]->IE == 0)){
@@ -221,6 +229,8 @@ void searchExpense(Moneyfolio *mf[], int total){         // 지출내역 검색 
     search[strlen(search)-1] = '\0';
 
     for(int i = 0; i < total; i++){
+        if(mf[i]->price == -1)
+            continue;
         month = mf[i]->date[0] * 10 + mf[i]->date[1];
         day = mf[i]->date[2] * 10 + mf[i]->date[3];
         if((strstr(mf[i]->note, search) != NULL) && (mf[i]->IE == 1)){
@@ -249,6 +259,8 @@ void dayList(Moneyfolio *mf[], int total){     // 일일 내역 list
 
     month = mf[0]->date[0] * 10 + mf[0]->date[1];
     for(int i = 0; i < total, ct->tm_mon + 1 == month; i++){
+        if(mf[i]->price == -1)
+            continue;
         month = mf[i]->date[0] * 10 + mf[i]->date[1];
         day = mf[i]->date[2] * 10 + mf[i]->date[3];
         if(pmonth != month || pday != day)
@@ -272,6 +284,8 @@ void monthList(Moneyfolio *mf[], int total){
     int pday = 0;
 
     for(int i = 0; i < total; i++){
+        if(mf[i]->price == -1)
+            continue;
         month = mf[i]->date[0] * 10 + mf[i]->date[1];
         day = mf[i]->date[2] * 10 + mf[i]->date[3];
         if(month != pmonth)
@@ -302,6 +316,8 @@ void save(Moneyfolio *mf[], int total){
 
     month = mf[0]->date[0] * 10 + mf[0]->date[1];
     for(int i = 0; i < total, ct->tm_mon + 1 == month; i++){
+        if(mf[i]->price == -1)
+            continue;
         month = mf[i]->date[0] * 10 + mf[i]->date[1];
         day = mf[i]->date[2] * 10 + mf[i]->date[3];
         if(pmonth != month || pday != day)
