@@ -7,7 +7,6 @@ int main(void){
     int IE;
     int countIn = 0;
     int countEx = 0;
-
     while(1){
         menu = selectMenu();
         if(menu == 0) break;
@@ -15,16 +14,16 @@ int main(void){
         else if(menu == 2){
             IE = selectIE();
             if(IE == 1)
-                addIncome(m);
+                countIn += addIncome(m[(countIn+countEx)++]);
             else if(IE == 2)
-                addExpense(m);
+                countEx += addExpense(m[(countIn+countEx)++]);
         }
         else if(menu == 3){
             IE = selectIE();
             if(IE == 1)
-                addfIncome(m);
+                countIn += addfIncome(m[(countIn+countEx)++]);
             else if(IE == 2)
-                addfExpense(m);
+                countEx += addfExpense(m[(countIn+countEx)++]);
         }
         else if(menu == 4){
             IE = selectIE();
@@ -43,12 +42,13 @@ int main(void){
         else if(menu == 6){
             IE = selectIE();
             if(IE == 1)
-                updateIncome(m);
+                updateIncome(m[(countIn + countEx)-1]);
             else if(IE == 2)
-                updateExpense(m);
+                updateExpense(m[(countIn + countEx)-1]);
         }
         else if(menu == 7){
-            deleteIE(m);
+            deleteIE(m[(countIn + countEx)-1]);
+            countIn--; // 수정 필요
         }
         else if(menu == 8)  dayList(m, countIn + countEx);
         else if(menu == 9)  monthList(m, countIn + countEx);
