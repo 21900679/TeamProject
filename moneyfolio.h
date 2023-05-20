@@ -6,9 +6,6 @@ typedef struct{
         int IE;         // 수입(0), 지출(1)
 } Moneyfolio;
 
-char InCate[3][10] = {"월급","부수입","용돈"};
-char ExCate[3][20] = {"식비","생활용품","교통/차량"};
-
 void getDate(Moneyfolio *mf);                   // Date 입력받는 수
 int addIncome(Moneyfolio *mf);                  // 수입내역 추가
 int addExpense(Moneyfolio *mf);                 // 지출내역 추가
