@@ -1,49 +1,60 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "moneyfolio.h"
 
 int main(void){
     Moneyfolio *m[200];
     int menu;
     int IE;
-    int countIn = 0;
-    int countEx = 0;
+    // int countIn = 0;
+    // int countEx = 0;
+    int count = 0;
     while(1){
         menu = selectMenu();
         if(menu == 0) break;
-        if(menu == 1)   sumList(m, countIn + countEx);
+        if(menu == 1){
+            if(count == 0)
+                printf("ÀÔ·ÂµÈ ³»¿ªÀÌ ¾ø½À´Ï´Ù.\n");
+            else
+                sumList(m, count);
+        }   
         else if(menu == 2){
             IE = selectIE();
-            if(IE == 1)
-                countIn += addIncome(m[(countIn+countEx)++]);
-            else if(IE == 2)
-                countEx += addExpense(m[(countIn+countEx)++]);
+            if(IE == 1){
+                m[count] = (Moneyfolio *) malloc (sizeof(Moneyfolio));
+                count += addIncome(m[count]);
+            }
+            else if(IE == 2){
+                m[count] = (Moneyfolio *) malloc (sizeof(Moneyfolio));
+                count += addExpense(m[count]);
+            }
         }
         else if(menu == 3){
             IE = selectIE();
             if(IE == 1)
-                countIn += addfIncome(m[(countIn+countEx)++]);
+                count += addfIncome(m[count]);
             else if(IE == 2)
-                countEx += addfExpense(m[(countIn+countEx)++]);
+                count += addfExpense(m[count]);
         }
         else if(menu == 4){
             IE = selectIE();
             if(IE == 1)
-                searchIncome(m, countIn + countEx);
+                searchIncome(m, count);
             else if(IE == 2)
-                searchExpense(m, countIn + countEx);
+                searchExpense(m, count);
         }
         else if(menu == 5){
             IE = selectIE();
             if(IE == 1)
-                searchCateIn(m, countIn + countEx);
+                searchCateIn(m, count);
             else if(IE == 2)
-                searchCateEx(m, countIn + countEx);
+                searchCateEx(m, count);
         }
         else if(menu == 6){
             IE = selectIE();
-            int no = selectNo(m, (countIn + countEx);
+            int no = selectNo(m, count);
             if(no == 0){
-                printf("=> ì·¨ì†Œë¨!\n");
+                printf("=> Ãë¼ÒµÊ!\n");
                 continue;
             }
             if(IE == 1)
@@ -53,19 +64,19 @@ int main(void){
         }
         else if(menu == 7){
             IE = selectIE();
-            int no = selectNo(m, countIn + countEx;
+            int no = selectNo(m, count);
             if(no == 0){
-                printf("=> ì·¨ì†Œë¨!\n");
+                printf("=> Ãë¼ÒµÊ!\n");
                 continue;
             }
             deleteIE(m[no-1]);
-            if(IE == 1) countIn--;
-            else if(IE == 2) countEx--;
+            // if(IE == 1) count--;
+            // else if(IE == 2) count--;
         }
-        else if(menu == 8)  dayList(m, countIn + countEx);
-        else if(menu == 9)  monthList(m, countIn + countEx);
-        else if(menu == 10) save(m, countIn + countEx);
+        else if(menu == 8)  dayList(m, count);
+        else if(menu == 9)  monthList(m, count);
+        else if(menu == 10) save(m, count);
     }
-    printf("=> ì¢…ë£Œë¨!\n");
+    printf("=> Á¾·áµÊ!\n");
     return 0;
 }
