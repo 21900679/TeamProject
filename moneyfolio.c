@@ -216,6 +216,8 @@ void searchIncome(Moneyfolio *mf[], int total){         // 수입내역 검색 기능
     int day = 0;
     int pmonth = 0;
     int pday = 0;
+    int find = 0;
+
     printf("검색하실 내용을 입력해 주세요. ");
     fflush(stdin);
     fgets(search, 100, stdin);
@@ -229,14 +231,16 @@ void searchIncome(Moneyfolio *mf[], int total){         // 수입내역 검색 기능
         if((strstr(mf[i]->note, search) != NULL) && (mf[i]->IE == 0)){
             if(pmonth != month || pday != day)
                 printf("%d월 %d일-------------------------------\n", month, day);
-            printf("%s %s %d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
-            if(pmonth != month || pday != day)
-                printf("----------------------------------------\n");
+            printf("%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            pmonth = month;
+            pday = day;
+            find = 1;
         }
-        pmonth = month;
-        pday = day;
     }
-    printf("----------------------------------------\n");
+    if(find == 1)
+        printf("---------------------------------------\n");
+    else
+        printf("찾으시는 내용의 내역이 없습니다.\n");
 }
 
 void searchExpense(Moneyfolio *mf[], int total){         // 지출내역 검색 기능
@@ -245,6 +249,8 @@ void searchExpense(Moneyfolio *mf[], int total){         // 지출내역 검색 기능
     int day = 0;
     int pmonth = 0;
     int pday = 0;
+    int find = 0;
+
     printf("검색하실 내용을 입력해 주세요. ");
     fflush(stdin);
     fgets(search, 100, stdin);
@@ -258,14 +264,16 @@ void searchExpense(Moneyfolio *mf[], int total){         // 지출내역 검색 기능
         if((strstr(mf[i]->note, search) != NULL) && (mf[i]->IE == 1)){
             if(pmonth != month || pday != day)
                 printf("%d월 %d일-------------------------------\n", month, day);
-            printf("%s %s %d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
-            if(pmonth != month || pday != day)
-                printf("----------------------------------------\n");
+            printf("%3s %20s %10d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            pmonth = month;
+            pday = day;
+            find = 1;
         }
-        pmonth = month;
-        pday = day;
     }
-    printf("----------------------------------------\n");
+    if(find == 1)
+        printf("---------------------------------------\n");
+    else
+        printf("찾으시는 내용의 내역이 없습니다.\n");
 }
 
 void dayList(Moneyfolio *mf[], int total){     // 일일 내역 list
