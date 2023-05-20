@@ -55,7 +55,7 @@ int addfExpense(Moneyfolio *mf);
 
 int selectNo(Moneyfolio *mf[], int count){
     int no;
-    sumList(mf, count)
+    sumList(mf, count);
     printf("수정하고자 하는 내역의 번호를 선택하세요 (취소: 0): ");
     scanf("%d", &no);
     return no;
