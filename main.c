@@ -41,14 +41,26 @@ int main(void){
         }
         else if(menu == 6){
             IE = selectIE();
+            int no = selectNo(m, (countIn + countEx);
+            if(no == 0){
+                printf("=> 취소됨!\n");
+                continue;
+            }
             if(IE == 1)
-                updateIncome(m[(countIn + countEx)-1]);
+                updateIncome(m[no-1]);
             else if(IE == 2)
-                updateExpense(m[(countIn + countEx)-1]);
+                updateExpense(m[no-1]);
         }
         else if(menu == 7){
-            deleteIE(m[(countIn + countEx)-1]);
-            countIn--; // 수정 필요
+            IE = selectIE();
+            int no = selectNo(m, countIn + countEx;
+            if(no == 0){
+                printf("=> 취소됨!\n");
+                continue;
+            }
+            deleteIE(m[no-1]);
+            if(IE == 1) countIn--;
+            else if(IE == 2) countEx--;
         }
         else if(menu == 8)  dayList(m, countIn + countEx);
         else if(menu == 9)  monthList(m, countIn + countEx);
