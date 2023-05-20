@@ -53,6 +53,13 @@ int addExpense(Moneyfolio *mf){        // 지출내역
 int addfIncome(Moneyfolio *mf);
 int addfExpense(Moneyfolio *mf);
 
+int selectNo(Moneyfolio *mf[], int count){
+    int no;
+    sumList(mf, count)
+    printf("수정하고자 하는 내역의 번호를 선택하세요 (취소: 0): ");
+    scanf("%d", &no);
+    return no;
+}
 void updateIncome(Moneyfolio *mf){
     getDate(mf);
     printf("금액을 입력하세요: ");
