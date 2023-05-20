@@ -288,7 +288,7 @@ void dayList(Moneyfolio *mf[], int total){     // 老老 郴开 list
     ct = localtime(&t1);
 
     month = (mf[0]->date[0] - '0') * 10 + (mf[0]->date[1] - '0');
-    for(int i = 0; i < total, ct->tm_mon + 1 == month; i++){
+    for(int i = 0; i < total; i++){
         if(mf[i]->price == -1)
             continue;
         month = (mf[i]->date[0] - '0') * 10 + (mf[i]->date[1] - '0');
@@ -296,11 +296,9 @@ void dayList(Moneyfolio *mf[], int total){     // 老老 郴开 list
         if(pmonth != month || pday != day)
             printf("%d岿 %d老-------------------------------\n", month, day);
         if(mf[i]->IE == 0)
-            printf("%s %s %d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
         else
-            printf("%s %s %d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
-        if(pmonth != month || pday != day)
-            printf("----------------------------------------\n");
+            printf("%3s %20s %10d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
         pmonth = month;
         pday = day;
     }
@@ -321,9 +319,9 @@ void monthList(Moneyfolio *mf[], int total){
         if(month != pmonth)
             printf("%d岿-------------------------------\n", month);
         if(mf[i]->IE == 0)
-            printf("%d老 %s %s %d\n", day, InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%d老 %3s %20s %10d\n", day, InCate[mf[i]->category], mf[i]->note, mf[i]->price);
         else
-            printf("%d老 %s %s %d\n", day, ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%d老 %3s %20s %10d\n", day, ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
         pmonth = month;
         pday = day;
     }
