@@ -15,6 +15,7 @@ int addExpense(Moneyfolio *mf);                 // 지출내역 추가
 int addfIncome(Moneyfolio *mf);                 // 고정수입내역 추가
 int addfExpense(Moneyfolio *mf);                // 고정지출내역 추가
 
+int selectNo(Moneyfolio *mf[], int count);      // 선택하고자 하는 내역의 index
 void updateIncome(Moneyfolio *mf);              // 수입내역 수정
 void updateExpense(Moneyfolio *mf);             // 지출내역 수정
 int deleteIE(Moneyfolio *mf);                   // 내역 삭제
