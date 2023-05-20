@@ -279,7 +279,7 @@ void dayList(Moneyfolio *mf[], int total){     // 일일 내역 list
     t1 = time(NULL);
     ct = localtime(&t1);
 
-    month = mf[0]->date[0] * 10 + mf[0]->date[1];
+    month = (mf[0]->date[0] - '0') * 10 + (mf[0]->date[1] - '0');
     for(int i = 0; i < total, ct->tm_mon + 1 == month; i++){
         if(mf[i]->price == -1)
             continue;
@@ -336,8 +336,8 @@ void save(Moneyfolio *mf[], int total){
 
     FILE *file = fopen("moneyfolio.txt", "w");
 
-    month = mf[0]->date[0] * 10 + mf[0]->date[1];
-    for(int i = 0; i < total, ct->tm_mon + 1 == month; i++){
+    month = (mf[0]->date[0] - '0') * 10 + (mf[0]->date[1] - '0');
+    for(int i = 0; i < total; i++){
         if(mf[i]->price == -1)
             continue;
         month = (mf[i]->date[0] - '0') * 10 + (mf[i]->date[1] - '0');
@@ -345,20 +345,19 @@ void save(Moneyfolio *mf[], int total){
         if(pmonth != month || pday != day)
             fprintf(file, "%d월 %d일-------------------------------\n", month, day);
         if(mf[i]->IE == 0){
-            fprintf(file, "%s %s %d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            fprintf(file, "%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
             sum += mf[i]->price;
         }
         else{
-            fprintf(file, "%s %s %d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            fprintf(file, "%3s %20s %10d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
             sum -= mf[i]->price;
         }
-        if(pmonth != month || pday != day)
-            fprintf(file, "----------------------------------------\n");
         pmonth = month;
         pday = day;
     }
-    fprintf(file, "---------------------------------- 합계 : %d ------\n", sum);
+    fprintf(file, "------------------------ 합계 : %d --\n", sum);
     fclose(file);
+    printf("저장되었습니다.\n");
 }
 
 int selectIE(){
