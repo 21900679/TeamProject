@@ -9,8 +9,8 @@ typedef struct{
 void getDate(Moneyfolio *mf);                   // Date 입력받는 수
 int addIncome(Moneyfolio *mf);                  // 수입내역 추가
 int addExpense(Moneyfolio *mf);                 // 지출내역 추가
-int addfIncome(Moneyfolio *mf);                 // 고정수입내역 추가
-int addfExpense(Moneyfolio *mf);                // 고정지출내역 추가
+int addfIncome(Moneyfolio *mf[], int count);    // 고정수입내역 추가
+int addfExpense(Moneyfolio *mf[], int count);   // 고정지출내역 추가
 
 int selectNo(Moneyfolio *mf[], int count);      // 선택하고자 하는 내역의 index
 void updateIncome(Moneyfolio *mf);              // 수입내역 수정
