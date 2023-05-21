@@ -4,17 +4,17 @@
 #include <time.h>
 #include "moneyfolio.h"
 
-char InCate[3][10] = {"¿ù±Ş","ºÎ¼öÀÔ","¿ëµ·"};
-char ExCate[3][20] = {"½Äºñ","»ıÈ°¿ëÇ°","±³Åë/Â÷·®"};
+char InCate[3][10] = {"ì›”ê¸‰","ë¶€ìˆ˜ì…","ìš©ëˆ"};
+char ExCate[3][20] = {"ì‹ë¹„","ìƒí™œìš©í’ˆ","êµí†µ/ì°¨ëŸ‰"};
 
 void getDate(Moneyfolio *mf){           // Date 
     int month, day;
     char input_date[6] = "";
     char month_str[3] = "";
     char day_str[3] = "";
-    printf("¿ùÀ» ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("ì›”ì„ ì…ë ¥í•˜ì„¸ìš”: ");
     scanf("%d", &month);
-    printf("ÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("ì¼ì„ ì…ë ¥í•˜ì„¸ìš”: ");
     scanf("%d", &day);
     if (month < 10)
         sprintf(month_str, "0%d", month);
@@ -29,32 +29,47 @@ void getDate(Moneyfolio *mf){           // Date
     strcpy(mf->date, input_date);
     // printf("[0] = %c, [1] = %c, [2] = %c, [3] = %c\n", mf->date[0], mf->date[1], mf->date[2], mf->date[3]);
 }
-int addIncome(Moneyfolio *mf){          // ¼öÀÔ³»¿ª 
+int addIncome(Moneyfolio *mf){          // ìˆ˜ì…ë‚´ì—­ 
     getDate(mf);
-    printf("±İ¾×À» ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”: ");
     scanf("%d", &mf->price);
-    printf("¼öÀÔ¿¡ ´ëÇÑ ³»¿ªÀ» ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("ìˆ˜ì…ì— ëŒ€í•œ ë‚´ì—­ì„ ì…ë ¥í•˜ì„¸ìš”: ");
     getchar();
     fgets(mf->note, 100, stdin);
     mf->note[strlen(mf->note)-1] = '\0';
-    // ¼öÀÔ ºĞ·ù ¸®½ºÆ® print ÇÏ±â
-    printf("¼öÀÔ¿¡ ´ëÇÑ ºĞ·ù¸¦ ¼±ÅÃÇÏ¼¼¿ä: ");
+    int count = sizeof(InCate)/sizeof(InCate[0]);
+    for(int i = 0; i<count; i++){
+        if(i == count-1)
+            printf("%d. %s\n", i+1, InCate[i]);
+        else
+            printf("%d. %s, ", i+1, InCate[i]);
+    } // ìˆ˜ì…ì— ëŒ€í•œ ë¶„ë¥˜ ì¶œë ¥
+    printf("ìˆ˜ì…ì— ëŒ€í•œ ë¶„ë¥˜ë¥¼ ì„ íƒí•˜ì„¸ìš”: ");
     scanf("%d", &(mf->category));
     mf->IE = 0;
+    printf("ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.\n\n\n");
     return 1;
 }
-int addExpense(Moneyfolio *mf){        // ÁöÃâ³»¿ª 
+int addExpense(Moneyfolio *mf){        // ì§€ì¶œë‚´ì—­ 
     getDate(mf);
-    printf("±İ¾×À» ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”: ");
     scanf("%d", &mf->price);
-    printf("ÁöÃâ¿¡ ´ëÇÑ ³»¿ªÀ» ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("ì§€ì¶œì— ëŒ€í•œ ë‚´ì—­ì„ ì…ë ¥í•˜ì„¸ìš”: ");
     getchar();
     fgets(mf->note, 100, stdin);
     mf->note[strlen(mf->note)-1] = '\0';
-    // ÁöÃâ ºĞ·ù ¸®½ºÆ® print ÇÏ±â
-    printf("ÁöÃâ¿¡ ´ëÇÑ ºĞ·ù¸¦ ¼±ÅÃÇÏ¼¼¿ä: ");
+    int count = sizeof(ExCate)/sizeof(ExCate[0]);
+    for(int i = 0; i<count; i++){
+        if(i == count-1)
+            printf("%d. %s\n", i+1, ExCate[i]);
+        else
+            printf("%d. %s, ", i+1, ExCate[i]);
+    } // ì§€ì¶œì— ëŒ€í•œ ë¶„ë¥˜ ì¶œë ¥
+    printf("ì§€ì¶œì— ëŒ€í•œ ë¶„ë¥˜ë¥¼ ì„ íƒí•˜ì„¸ìš”: ");
     scanf("%d", &mf->category);
     mf->IE = 1;
+    printf("ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.\n\n\n");
+    
     return 1;
 }
 int addfIncome(Moneyfolio *mf){
@@ -67,42 +82,56 @@ int addfExpense(Moneyfolio *mf){
 int selectNo(Moneyfolio *mf[], int count){
     int no;
     sumList(mf, count);
-    printf("¼öÁ¤ÇÏ°íÀÚ ÇÏ´Â ³»¿ªÀÇ ¹øÈ£¸¦ ¼±ÅÃÇÏ¼¼¿ä (Ãë¼Ò: 0): ");
+    printf("ìˆ˜ì •í•˜ê³ ì í•˜ëŠ” ë‚´ì—­ì˜ ë²ˆí˜¸ë¥¼ ì„ íƒí•˜ì„¸ìš” (ì·¨ì†Œ: 0): ");
     scanf("%d", &no);
     return no;
 }
 void updateIncome(Moneyfolio *mf){
     getDate(mf);
-    printf("±İ¾×À» ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”: ");
     scanf("%d", &mf->price);
-    printf("¼öÀÔ¿¡ ´ëÇÑ ³»¿ªÀ» ÀÔ·Â ÇØ ÁÖ¼¼¿ä: ");
+    printf("ìˆ˜ì…ì— ëŒ€í•œ ë‚´ì—­ì„ ì…ë ¥ í•´ ì£¼ì„¸ìš”: ");
     getchar();
     fgets(mf->note, 100, stdin);
     mf->note[strlen(mf->note)-1] = '\0';
-    // ºĞ·ù ¸®½ºÆ® print ÇÏ±â
-    printf("ºĞ·ù¸¦ ¼±ÅÃÇÏ¼¼¿ä: ");
+    int count = sizeof(InCate)/sizeof(InCate[0]);
+    for(int i = 0; i<count; i++){
+        if(i == count-1)
+            printf("%d. %s\n", i+1, InCate[i]);
+        else
+            printf("%d. %s, ", i+1, InCate[i]);
+    } // ìˆ˜ì…ì— ëŒ€í•œ ë¶„ë¥˜ ì¶œë ¥
+    printf("ë¶„ë¥˜ë¥¼ ì„ íƒí•˜ì„¸ìš”: ");
     scanf("%d", &(mf->category));
+    printf("\nìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.\n\n\n");
 }
 void updateExpense(Moneyfolio *mf){
     getDate(mf);
-    printf("±İ¾×À» ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”: ");
     scanf("%d", &mf->price);
-    printf("¼öÀÔ¿¡ ´ëÇÑ ³»¿ªÀ» ÀÔ·Â ÇØ ÁÖ¼¼¿ä: ");
+    printf("ìˆ˜ì…ì— ëŒ€í•œ ë‚´ì—­ì„ ì…ë ¥ í•´ ì£¼ì„¸ìš”: ");
     getchar();
     fgets(mf->note, 100, stdin);
     mf->note[strlen(mf->note)-1] = '\0';
-    // ºĞ·ù ¸®½ºÆ® print ÇÏ±â
-    printf("ºĞ·ù¸¦ ¼±ÅÃÇÏ¼¼¿ä: ");
+    int count = sizeof(ExCate)/sizeof(ExCate[0]);
+    for(int i = 0; i<count; i++){
+        if(i == count-1)
+            printf("%d. %s\n", i+1, ExCate[i]);
+        else
+            printf("%d. %s, ", i+1, ExCate[i]);
+    } // ì§€ì¶œì— ëŒ€í•œ ë¶„ë¥˜ ì¶œë ¥
+    printf("ë¶„ë¥˜ë¥¼ ì„ íƒí•˜ì„¸ìš”: ");
     scanf("%d", &(mf->category));
+    printf("\nìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.\n\n\n");
 }
-int deleteIE(Moneyfolio *mf){               // ³»¿ª »èÁ¦
+int deleteIE(Moneyfolio *mf){               // ë‚´ì—­ ì‚­ì œ
     mf->date[0] = '\0';
     mf->price = -1;
     mf->note[0] = '\0';
     mf->category = -1;
 }
 
-void sumList(Moneyfolio *mf[], int total){      // ÀÏº° ³»¿ª list + ÇÕ°è Ãâ·Â ±â´É
+void sumList(Moneyfolio *mf[], int total){      // ì¼ë³„ ë‚´ì—­ list + í•©ê³„ ì¶œë ¥ ê¸°ëŠ¥
     int month = 0;
     int day = 0;
     int pmonth = 0;
@@ -121,22 +150,22 @@ void sumList(Moneyfolio *mf[], int total){      // ÀÏº° ³»¿ª list + ÇÕ°è Ãâ·Â ±â
         month = (mf[i]->date[0] - '0') * 10 + (mf[i]->date[1] - '0');
         day = (mf[i]->date[2] - '0') * 10 + (mf[i]->date[3] - '0');
         if(pmonth != month || pday != day)
-            printf("%d¿ù %dÀÏ-------------------------------\n", month, day);
+            printf("%dì›” %dì¼-------------------------------\n", month, day);
         if(mf[i]->IE == 0){
-            printf("%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%3s %20s %10d\n", InCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
             sum += mf[i]->price;
         }
         else{
-            printf("%3s %20s %10d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%3s %20s %10d\n", ExCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
             sum -= mf[i]->price;
         }
         pmonth = month;
         pday = day;
     }
-    printf("------------------------ ÇÕ°è : %d --\n", sum);
+    printf("------------------------ í•©ê³„ : %d --\n\n\n", sum);
 }
 
-void searchCateIn(Moneyfolio *mf[], int total){       // ¼öÀÔ ºĞ·ùº° °Ë»ö ±â´É
+void searchCateIn(Moneyfolio *mf[], int total){       // ìˆ˜ì… ë¶„ë¥˜ë³„ ê²€ìƒ‰ ê¸°ëŠ¥
     char search[100];
     int month = 0;
     int day = 0;
@@ -145,9 +174,9 @@ void searchCateIn(Moneyfolio *mf[], int total){       // ¼öÀÔ ºĞ·ùº° °Ë»ö ±â´É
     int find = 0;
 
     while(1){
-        printf("°Ë»öÇÏ½Ç ¼öÀÔ category(¿ù±Ş, ºÎ¼öÀÔ, ¿ëµ·)¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä. ");
+        printf("ê²€ìƒ‰í•˜ì‹¤ ìˆ˜ì… category(ì›”ê¸‰, ë¶€ìˆ˜ì…, ìš©ëˆ)ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”. ");
         scanf("%s", search);
-        if(strcmp("¿ù±Ş", search) == 0 || strcmp("ºÎ¼öÀÔ", search) == 0 || strcmp("¿ëµ·", search) == 0){
+        if(strcmp("ì›”ê¸‰", search) == 0 || strcmp("ë¶€ìˆ˜ì…", search) == 0 || strcmp("ìš©ëˆ", search) == 0){
             for(int i = 0; i < total; i++){
                 if(mf[i]->price == -1)
                     continue;
@@ -155,7 +184,7 @@ void searchCateIn(Moneyfolio *mf[], int total){       // ¼öÀÔ ºĞ·ùº° °Ë»ö ±â´É
                 day = (mf[i]->date[2] - '0') * 10 + (mf[i]->date[3] - '0');
                 if((strcmp(InCate[mf[i]->category], search) == 0) && (mf[i]->IE == 0)){
                     if(pmonth != month || pday != day)
-                        printf("%d¿ù %dÀÏ-------------------------------\n", month, day);
+                        printf("%dì›” %dì¼-------------------------------\n", month, day);
                     printf("%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
                     find = 1;
                     pmonth = month;
@@ -165,15 +194,15 @@ void searchCateIn(Moneyfolio *mf[], int total){       // ¼öÀÔ ºĞ·ùº° °Ë»ö ±â´É
             if(find == 1)
                 printf("----------------------------------------\n");
             else 
-                printf("Ã£À¸½Ã´Â category ³»¿ªÀÌ ¾ø½À´Ï´Ù.\n");
+                printf("ì°¾ìœ¼ì‹œëŠ” category ë‚´ì—­ì´ ì—†ìŠµë‹ˆë‹¤.\n\n\n");
             break;
         }   
         else
-            printf("ÀÏÄ¡ÇÏ´Â category°¡ ¾ø½À´Ï´Ù.\n");
+            printf("ì¼ì¹˜í•˜ëŠ” categoryê°€ ì—†ìŠµë‹ˆë‹¤.\n\n\n");
     }
 }
 
-void searchCateEx(Moneyfolio *mf[], int total){       // ÁöÃâ ºĞ·ùº° °Ë»ö ±â´É
+void searchCateEx(Moneyfolio *mf[], int total){       // ì§€ì¶œ ë¶„ë¥˜ë³„ ê²€ìƒ‰ ê¸°ëŠ¥
     char search[100];
     int month = 0;
     int day = 0;
@@ -182,9 +211,9 @@ void searchCateEx(Moneyfolio *mf[], int total){       // ÁöÃâ ºĞ·ùº° °Ë»ö ±â´É
     int find = 0;
 
     while(1){
-        printf("°Ë»öÇÏ½Ç ¼öÀÔ category(½Äºñ, »ıÈ°¿ëÇ°, ±³Åë/Â÷·®)¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä. ");
+        printf("ê²€ìƒ‰í•˜ì‹¤ ìˆ˜ì… category(ì‹ë¹„, ìƒí™œìš©í’ˆ, êµí†µ/ì°¨ëŸ‰)ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”. ");
         scanf("%s", search);
-        if(strcmp("½Äºñ", search) == 0 || strcmp("»ıÈ°¿ëÇ°", search) == 0 || strcmp("±³Åë/Â÷·®", search) == 0){
+        if(strcmp("ì‹ë¹„", search) == 0 || strcmp("ìƒí™œìš©í’ˆ", search) == 0 || strcmp("êµí†µ/ì°¨ëŸ‰", search) == 0){
             for(int i = 0; i < total; i++){
                 if(mf[i]->price == -1)
                     continue;
@@ -192,7 +221,7 @@ void searchCateEx(Moneyfolio *mf[], int total){       // ÁöÃâ ºĞ·ùº° °Ë»ö ±â´É
                 day = (mf[i]->date[2] - '0') * 10 + (mf[i]->date[3] - '0');
                 if(strcmp(ExCate[mf[i]->category], search) == 0 && (mf[i]->IE == 1)){
                     if(pmonth != month || pday != day)
-                        printf("%d¿ù %dÀÏ-------------------------------\n", month, day);
+                        printf("%dì›” %dì¼-------------------------------\n", month, day);
                     printf("%3s %20s %10d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
                     pmonth = month;
                     pday = day;
@@ -202,15 +231,15 @@ void searchCateEx(Moneyfolio *mf[], int total){       // ÁöÃâ ºĞ·ùº° °Ë»ö ±â´É
             if(find == 1)
                 printf("----------------------------------------\n");
             else 
-                printf("Ã£À¸½Ã´Â category ³»¿ªÀÌ ¾ø½À´Ï´Ù.\n");
+                printf("ì°¾ìœ¼ì‹œëŠ” category ë‚´ì—­ì´ ì—†ìŠµë‹ˆë‹¤.\n\n\n");
             break;
         }   
         else
-            printf("ÀÏÄ¡ÇÏ´Â category°¡ ¾ø½À´Ï´Ù.\n");
+            printf("ì¼ì¹˜í•˜ëŠ” categoryê°€ ì—†ìŠµë‹ˆë‹¤.\n\n\n");
     }
 }
 
-void searchIncome(Moneyfolio *mf[], int total){         // ¼öÀÔ³»¿ª °Ë»ö ±â´É
+void searchIncome(Moneyfolio *mf[], int total){         // ìˆ˜ì…ë‚´ì—­ ê²€ìƒ‰ ê¸°ëŠ¥
     char search[100];
     int month = 0;
     int day = 0;
@@ -218,7 +247,7 @@ void searchIncome(Moneyfolio *mf[], int total){         // ¼öÀÔ³»¿ª °Ë»ö ±â´É
     int pday = 0;
     int find = 0;
 
-    printf("°Ë»öÇÏ½Ç ³»¿ëÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä. ");
+    printf("ê²€ìƒ‰í•˜ì‹¤ ë‚´ìš©ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”. ");
     fflush(stdin);
     fgets(search, 100, stdin);
     search[strlen(search)-1] = '\0';
@@ -230,7 +259,7 @@ void searchIncome(Moneyfolio *mf[], int total){         // ¼öÀÔ³»¿ª °Ë»ö ±â´É
         day = (mf[i]->date[2] - '0') * 10 + (mf[i]->date[3] - '0');
         if((strstr(mf[i]->note, search) != NULL) && (mf[i]->IE == 0)){
             if(pmonth != month || pday != day)
-                printf("%d¿ù %dÀÏ-------------------------------\n", month, day);
+                printf("%dì›” %dì¼-------------------------------\n", month, day);
             printf("%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
             pmonth = month;
             pday = day;
@@ -240,10 +269,10 @@ void searchIncome(Moneyfolio *mf[], int total){         // ¼öÀÔ³»¿ª °Ë»ö ±â´É
     if(find == 1)
         printf("---------------------------------------\n");
     else
-        printf("Ã£À¸½Ã´Â ³»¿ëÀÇ ³»¿ªÀÌ ¾ø½À´Ï´Ù.\n");
+        printf("ì°¾ìœ¼ì‹œëŠ” ë‚´ìš©ì˜ ë‚´ì—­ì´ ì—†ìŠµë‹ˆë‹¤.\n\n\n");
 }
 
-void searchExpense(Moneyfolio *mf[], int total){         // ÁöÃâ³»¿ª °Ë»ö ±â´É
+void searchExpense(Moneyfolio *mf[], int total){         // ì§€ì¶œë‚´ì—­ ê²€ìƒ‰ ê¸°ëŠ¥
     char search[100];
     int month = 0;
     int day = 0;
@@ -251,7 +280,7 @@ void searchExpense(Moneyfolio *mf[], int total){         // ÁöÃâ³»¿ª °Ë»ö ±â´É
     int pday = 0;
     int find = 0;
 
-    printf("°Ë»öÇÏ½Ç ³»¿ëÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä. ");
+    printf("ê²€ìƒ‰í•˜ì‹¤ ë‚´ìš©ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”. ");
     fflush(stdin);
     fgets(search, 100, stdin);
     search[strlen(search)-1] = '\0';
@@ -263,7 +292,7 @@ void searchExpense(Moneyfolio *mf[], int total){         // ÁöÃâ³»¿ª °Ë»ö ±â´É
         day = (mf[i]->date[2] - '0') * 10 + (mf[i]->date[3] - '0');
         if((strstr(mf[i]->note, search) != NULL) && (mf[i]->IE == 1)){
             if(pmonth != month || pday != day)
-                printf("%d¿ù %dÀÏ-------------------------------\n", month, day);
+                printf("%dì›” %dì¼-------------------------------\n", month, day);
             printf("%3s %20s %10d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
             pmonth = month;
             pday = day;
@@ -273,10 +302,10 @@ void searchExpense(Moneyfolio *mf[], int total){         // ÁöÃâ³»¿ª °Ë»ö ±â´É
     if(find == 1)
         printf("---------------------------------------\n");
     else
-        printf("Ã£À¸½Ã´Â ³»¿ëÀÇ ³»¿ªÀÌ ¾ø½À´Ï´Ù.\n");
+        printf("ì°¾ìœ¼ì‹œëŠ” ë‚´ìš©ì˜ ë‚´ì—­ì´ ì—†ìŠµë‹ˆë‹¤.\n\n\n");
 }
 
-void dayList(Moneyfolio *mf[], int total){     // ÀÏÀÏ ³»¿ª list
+void dayList(Moneyfolio *mf[], int total){     // ì¼ì¼ ë‚´ì—­ list
     int month = 0;
     int day = 0;
     int pmonth = 0;
@@ -294,7 +323,7 @@ void dayList(Moneyfolio *mf[], int total){     // ÀÏÀÏ ³»¿ª list
         month = (mf[i]->date[0] - '0') * 10 + (mf[i]->date[1] - '0');
         day = (mf[i]->date[2] - '0') * 10 + (mf[i]->date[3] - '0');
         if(pmonth != month || pday != day)
-            printf("%d¿ù %dÀÏ-------------------------------\n", month, day);
+            printf("%dì›” %dì¼-------------------------------\n", month, day);
         if(mf[i]->IE == 0)
             printf("%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
         else
@@ -317,11 +346,11 @@ void monthList(Moneyfolio *mf[], int total){
         month = (mf[i]->date[0] - '0') * 10 + (mf[i]->date[1] - '0');
         day = (mf[i]->date[2] - '0') * 10 + (mf[i]->date[3] - '0');
         if(month != pmonth)
-            printf("%d¿ù-------------------------------\n", month);
+            printf("%dì›”-------------------------------\n", month);
         if(mf[i]->IE == 0)
-            printf("%dÀÏ %3s %20s %10d\n", day, InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%dì¼ %3s %20s %10d\n", day, InCate[mf[i]->category], mf[i]->note, mf[i]->price);
         else
-            printf("%dÀÏ %3s %20s %10d\n", day, ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%dì¼ %3s %20s %10d\n", day, ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
         pmonth = month;
         pday = day;
     }
@@ -349,7 +378,7 @@ void save(Moneyfolio *mf[], int total){
         month = (mf[i]->date[0] - '0') * 10 + (mf[i]->date[1] - '0');
         day = (mf[i]->date[2] - '0') * 10 + (mf[i]->date[3] - '0');
         if(pmonth != month || pday != day)
-            fprintf(file, "%d¿ù %dÀÏ-------------------------------\n", month, day);
+            fprintf(file, "%dì›” %dì¼-------------------------------\n", month, day);
         if(mf[i]->IE == 0){
             fprintf(file, "%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
             sum += mf[i]->price;
@@ -361,37 +390,52 @@ void save(Moneyfolio *mf[], int total){
         pmonth = month;
         pday = day;
     }
-    fprintf(file, "------------------------ ÇÕ°è : %d --\n", sum);
+    fprintf(file, "------------------------ í•©ê³„ : %d --\n", sum);
     fclose(file);
-    printf("ÀúÀåµÇ¾ú½À´Ï´Ù.\n");
+    printf("ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤.\n\n\n");
 }
 
 int selectIE(){
     int IE;
-    printf("¼öÀÔ(1), ÁöÃâ(2)À» ¼±ÅÃÇØÁÖ¼¼¿ä. ");
+    printf("ìˆ˜ì…(1), ì§€ì¶œ(2)ì„ ì„ íƒí•´ì£¼ì„¸ìš”. ");
     scanf("%d", &IE);
     return IE;
 }
 
 int selectMenu(){
     int menu;
-    printf("¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ MoneyFolio ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤\n");
-    printf("|    1. Á¶È¸                        |\n");
-    printf("|    2. ¼öÀÔ/ÁöÃâ ³»¿ª Ãß°¡         |\n");
-    printf("|    3. °íÁ¤(¼öÀÔ/ÁöÃâ) ³»¿ª Ãß°¡   |\n");
-    printf("|    4. ¼öÀÔ/ÁöÃâ ³»¿ª °Ë»ö         |\n");
-    printf("|    5. ºĞ·ùº° °Ë»ö                 |\n");
-    printf("|    6. ¼öÀÔ/ÁöÃâ ³»¿ª ¼öÁ¤         |\n");
-    printf("|    7. ¼öÀÔ/ÁöÃâ ³»¿ª »èÁ¦         |\n");
-    printf("|    8. ÀÏÀÏ ³»¿ª Á¶È¸              |\n");
-    printf("|    9. ¿ùº° ³»¿ª Á¶È¸              |\n");
-    printf("|    10. ÀúÀåÇÏ±â                   |\n");
-    printf("¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥\n");
-    printf("¿øÇÏ´Â ¸Ş´º¸¦ ¼±ÅÃÇÏ½Ã¿À. ");
+    printf("â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MoneyFolio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”\n");
+    printf("|    1. ì¡°íšŒ                        |\n");
+    printf("|    2. ìˆ˜ì…/ì§€ì¶œ ë‚´ì—­ ì¶”ê°€         |\n");
+    printf("|    3. ê³ ì •(ìˆ˜ì…/ì§€ì¶œ) ë‚´ì—­ ì¶”ê°€   |\n");
+    printf("|    4. ìˆ˜ì…/ì§€ì¶œ ë‚´ì—­ ê²€ìƒ‰         |\n");
+    printf("|    5. ë¶„ë¥˜ë³„ ê²€ìƒ‰                 |\n");
+    printf("|    6. ìˆ˜ì…/ì§€ì¶œ ë‚´ì—­ ìˆ˜ì •         |\n");
+    printf("|    7. ìˆ˜ì…/ì§€ì¶œ ë‚´ì—­ ì‚­ì œ         |\n");
+    printf("|    8. ì¼ì¼ ë‚´ì—­ ì¡°íšŒ              |\n");
+    printf("|    9. ì›”ë³„ ë‚´ì—­ ì¡°íšŒ              |\n");
+    printf("|    10. ì €ì¥í•˜ê¸°                   |\n");
+    printf("â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜\n");
+    printf("ì›í•˜ëŠ” ë©”ë‰´ë¥¼ ì„ íƒí•˜ì‹œì˜¤. ");
     scanf("%d", &menu);
     return menu;
 }
 
 int compare_date(const void* first, const void* second){
-    return strcmp(((Moneyfolio*)first)->date, ((Moneyfolio*)second)->date);
+    Moneyfolio *mf1 = *(Moneyfolio**)first;
+    Moneyfolio *mf2 = *(Moneyfolio**)second;
+    int month1, month2;
+    int day1, day2;
+    month1 = (mf1->date[0] - '0') * 10 + (mf1->date[1] - '0');
+    month2 = (mf2->date[0] - '0') * 10 + (mf2->date[1] - '0');
+    day1 = (mf1->date[2] - '0') * 10 + (mf1->date[3] - '0');
+    day2 = (mf1->date[2] - '0') * 10 + (mf1->date[3] - '0');
+
+    if(month1 < month2) return -1;
+    else if(month1 > month2) return 1;
+    else{
+        if(day1 < day2) return -1;
+        else if(day2 > day2) return 1;
+        else return 0;
+    }
 }
