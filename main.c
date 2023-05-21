@@ -14,7 +14,7 @@ int main(void){
         if(menu == 0) break;
         if(menu == 1){
             if(count == 0)
-                printf("ÀÔ·ÂµÈ ³»¿ªÀÌ ¾ø½À´Ï´Ù.\n");
+                printf("ì…ë ¥ëœ ë‚´ì—­ì´ ì—†ìŠµë‹ˆë‹¤.\n");
             else
                 sumList(m, count);
         }   
@@ -23,10 +23,12 @@ int main(void){
             if(IE == 1){
                 m[count] = (Moneyfolio *) malloc (sizeof(Moneyfolio));
                 count += addIncome(m[count]);
+                qsort(m, count, sizeof(Moneyfolio*), compare_date);
             }
             else if(IE == 2){
                 m[count] = (Moneyfolio *) malloc (sizeof(Moneyfolio));
                 count += addExpense(m[count]);
+                qsort(m, count, sizeof(Moneyfolio*), compare_date);
             }
         }
         else if(menu == 3){
@@ -54,22 +56,36 @@ int main(void){
             IE = selectIE();
             int no = selectNo(m, count);
             if(no == 0){
-                printf("=> Ãë¼ÒµÊ!\n");
+                printf("=> ì·¨ì†Œë¨!\n");
                 continue;
             }
-            if(IE == 1)
+            if(IE == 1){
+                if(m[no-1]->IE != 0){
+                    printf("ìˆ˜ì… ë‚´ì—­ì„ ì„ íƒí•´ì£¼ì„¸ìš”.\\n\n\n");
+                    continue;
+                }
                 updateIncome(m[no-1]);
-            else if(IE == 2)
+                qsort(m, count, sizeof(Moneyfolio*), compare_date);
+            }
+                
+            else if(IE == 2){
+                if(m[no-1]->IE != 1){
+                    printf("ì§€ì¶œ ë‚´ì—­ì„ ì„ íƒí•´ì£¼ì„¸ìš”.\n\n\n");
+                    continue;
+                }
                 updateExpense(m[no-1]);
+                qsort(m, count, sizeof(Moneyfolio*), compare_date);
+            }
         }
         else if(menu == 7){
             IE = selectIE();
             int no = selectNo(m, count);
             if(no == 0){
-                printf("=> Ãë¼ÒµÊ!\n");
+                printf("=> ì·¨ì†Œë¨!\n");
                 continue;
             }
             deleteIE(m[no-1]);
+            qsort(m, count, sizeof(Moneyfolio*), compare_date);
             // if(IE == 1) count--;
             // else if(IE == 2) count--;
         }
@@ -77,6 +93,6 @@ int main(void){
         else if(menu == 9)  monthList(m, count);
         else if(menu == 10) save(m, count);
     }
-    printf("=> Á¾·áµÊ!\n");
+    printf("=> ì¢…ë£Œë¨!\n");
     return 0;
 }
