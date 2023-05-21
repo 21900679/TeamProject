@@ -48,6 +48,7 @@ int addIncome(Moneyfolio *mf){          // 수입내역
     scanf("%d", &(mf->category));
     mf->IE = 0;
     printf("추가되었습니다.\n\n\n");
+
     return 1;
 }
 int addExpense(Moneyfolio *mf){        // 지출내역 
@@ -72,11 +73,75 @@ int addExpense(Moneyfolio *mf){        // 지출내역
     
     return 1;
 }
-int addfIncome(Moneyfolio *mf){
-    return 1;
+int addfIncome(Moneyfolio *mf[], int count){
+    Moneyfolio* tmp = (Moneyfolio *) malloc (sizeof(Moneyfolio));
+    getDate(tmp);
+    int month, day;
+    month = (tmp->date[0] - '0') * 10 + (tmp->date[1] - '0');
+    day = (tmp->date[2] - '0') * 10 + (tmp->date[3] - '0');
+    printf("금액을 입력하세요: ");
+    scanf("%d", &tmp->price);
+    printf("수입에 대한 내역을 입력하세요: ");
+    getchar();
+    fgets(tmp->note, 100, stdin);
+    tmp->note[strlen(tmp->note)-1] = '\0';
+    int cateCount = sizeof(InCate)/sizeof(InCate[0]);
+    for(int i = 0; i<cateCount; i++){
+        if(i == cateCount-1)
+            printf("%d. %s\n", i+1, InCate[i]);
+        else
+            printf("%d. %s, ", i+1, InCate[i]);
+    } // 수입에 대한 분류 출력
+    printf("수입에 대한 분류를 선택하세요: ");
+    scanf("%d", &(tmp->category));
+    tmp->IE = 0;
+    for(int i = month; i<13; i++){
+        Moneyfolio* entry = (Moneyfolio*)malloc(sizeof(Moneyfolio));
+        memcpy(entry, tmp, sizeof(Moneyfolio));
+        entry->date[0] = '0' + (i / 10);
+        entry->date[1] = '0' + (i % 10);
+        entry->date[2] = '0' + (day / 10);
+        entry->date[3] = '0' + (day % 10);
+        mf[count++] = entry;
+    }
+    printf("고정 수입이 추가되었습니다.\n\n\n");
+
+    return count;
 }
-int addfExpense(Moneyfolio *mf){
-    return 1;
+int addfIncome(Moneyfolio *mf[], int count){
+    Moneyfolio* tmp = (Moneyfolio *) malloc (sizeof(Moneyfolio));
+    getDate(tmp);
+    int month, day;
+    month = (tmp->date[0] - '0') * 10 + (tmp->date[1] - '0');
+    day = (tmp->date[2] - '0') * 10 + (tmp->date[3] - '0');
+    printf("금액을 입력하세요: ");
+    scanf("%d", &tmp->price);
+    printf("지출에 대한 내역을 입력하세요: ");
+    getchar();
+    fgets(tmp->note, 100, stdin);
+    tmp->note[strlen(tmp->note)-1] = '\0';
+    int cateCount = sizeof(ExCate)/sizeof(ExCate[0]);
+    for(int i = 0; i<cateCount; i++){
+        if(i == cateCount-1)
+            printf("%d. %s\n", i+1, ExCate[i]);
+        else
+            printf("%d. %s, ", i+1, ExCate[i]);
+    } // 지출에 대한 분류 출력
+    printf("지출에 대한 분류를 선택하세요: ");
+    scanf("%d", &tmp->category);
+    tmp->IE = 1;
+    for(int i = month; i<13; i++){
+        Moneyfolio* entry = (Moneyfolio*)malloc(sizeof(Moneyfolio));
+        memcpy(entry, tmp, sizeof(Moneyfolio));
+        entry->date[0] = '0' + (i / 10);
+        entry->date[1] = '0' + (i % 10);
+        entry->date[2] = '0' + (day / 10);
+        entry->date[3] = '0' + (day % 10);
+        mf[count++] = entry;
+    }
+    printf("고정 지출이 추가되었습니다.\n\n\n");
+
+    return count;
 }
 
 int selectNo(Moneyfolio *mf[], int count){
