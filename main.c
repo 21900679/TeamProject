@@ -89,7 +89,6 @@ int main(void){
                 continue;
             }
             deleteIE(m[no-1]);
-            qsort(m, count, sizeof(Moneyfolio*), compare_date);
             // if(IE == 1) count--;
             // else if(IE == 2) count--;
         }
