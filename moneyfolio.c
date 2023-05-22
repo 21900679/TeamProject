@@ -193,6 +193,7 @@ int deleteIE(Moneyfolio *mf){               // 내역 삭제
     mf->price = -1;
     mf->note[0] = '\0';
     mf->category = -1;
+    printf("\n삭제되었습니다.\n\n\n");
 }
 
 void sumList(Moneyfolio *mf[], int total){      // 일별 내역 list + 합계 출력 기능
