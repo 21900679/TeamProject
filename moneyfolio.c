@@ -146,7 +146,7 @@ int addfExpense(Moneyfolio *mf[], int count){
 int selectNo(Moneyfolio *mf[], int count){
     int no;
     sumList(mf, count);
-    printf("수정하고자 하는 내역의 번호를 선택하세요 (취소: 0): ");
+    printf("원하는 내역의 번호를 선택하세요 (취소: 0): ");
     scanf("%d", &no);
     return no;
 }
