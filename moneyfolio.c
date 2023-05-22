@@ -108,7 +108,7 @@ int addfIncome(Moneyfolio *mf[], int count){
 
     return count;
 }
-int addfIncome(Moneyfolio *mf[], int count){
+int addfExpense(Moneyfolio *mf[], int count){
     Moneyfolio* tmp = (Moneyfolio *) malloc (sizeof(Moneyfolio));
     getDate(tmp);
     int month, day;
