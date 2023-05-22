@@ -33,10 +33,14 @@ int main(void){
         }
         else if(menu == 3){
             IE = selectIE();
-            if(IE == 1)
-                count += addfIncome(m[count]);
-            else if(IE == 2)
-                count += addfExpense(m[count]);
+            if(IE == 1){
+                count += addfIncome(m, count);
+                qsort(m, count, sizeof(Moneyfolio*), compare_date);
+            }            
+            else if(IE == 2){
+                count += addfExpense(m, count);
+                qsort(m, count, sizeof(Moneyfolio*), compare_date);
+            }
         }
         else if(menu == 4){
             IE = selectIE();
