@@ -173,7 +173,7 @@ void updateExpense(Moneyfolio *mf){
     getDate(mf);
     printf("금액을 입력하세요: ");
     scanf("%d", &mf->price);
-    printf("수입에 대한 내역을 입력 해 주세요: ");
+    printf("지출에 대한 내역을 입력 해 주세요: ");
     getchar();
     fgets(mf->note, 100, stdin);
     mf->note[strlen(mf->note)-1] = '\0';
