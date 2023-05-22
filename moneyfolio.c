@@ -370,11 +370,6 @@ void dayList(Moneyfolio *mf[], int total){     // 일일 내역 list
     int pmonth = 0;
     int pday = 0;
 
-    time_t t1;
-    struct tm* ct;
-    t1 = time(NULL);
-    ct = localtime(&t1);
-
     month = (mf[0]->date[0] - '0') * 10 + (mf[0]->date[1] - '0');
     for(int i = 0; i < total; i++){
         if(mf[i]->price == -1)
@@ -422,11 +417,6 @@ void save(Moneyfolio *mf[], int total){
     int pmonth = 0;
     int pday = 0;
     int sum = 0;
-
-    time_t t1;
-    struct tm* ct;
-    t1 = time(NULL);
-    ct = localtime(&t1);
 
     FILE *file = fopen("moneyfolio.txt", "w");
 
