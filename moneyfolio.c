@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 #include "moneyfolio.h"
 
 char InCate[3][10] = {"월급","부수입","용돈"};
@@ -203,11 +202,6 @@ void sumList(Moneyfolio *mf[], int total){      // 일별 내역 list + 합계 �
     int pday = 0;
     int sum = 0;
 
-    time_t t1;
-    struct tm* ct;
-    t1 = time(NULL);
-    ct = localtime(&t1);
-
     month = (mf[0]->date[0] - '0') * 10 + (mf[0]->date[1] - '0');
     for(int i = 0; i < total; i++){
         if(mf[i]->price == -1)
@@ -247,10 +241,10 @@ void searchCateIn(Moneyfolio *mf[], int total){       // 수입 분류별 검색
                     continue;
                 month = (mf[i]->date[0] - '0') * 10 + (mf[i]->date[1] - '0');
                 day = (mf[i]->date[2] - '0') * 10 + (mf[i]->date[3] - '0');
-                if((strcmp(InCate[mf[i]->category], search) == 0) && (mf[i]->IE == 0)){
+                if((strcmp(InCate[mf[i]->category-1], search) == 0) && (mf[i]->IE == 0)){
                     if(pmonth != month || pday != day)
                         printf("%d월 %d일-------------------------------\n", month, day);
-                    printf("%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+                    printf("%3s %20s %10d\n", InCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
                     find = 1;
                     pmonth = month;
                     pday = day;
@@ -284,10 +278,10 @@ void searchCateEx(Moneyfolio *mf[], int total){       // 지출 분류별 검색
                     continue;
                 month = (mf[i]->date[0] - '0') * 10 + (mf[i]->date[1] - '0');
                 day = (mf[i]->date[2] - '0') * 10 + (mf[i]->date[3] - '0');
-                if(strcmp(ExCate[mf[i]->category], search) == 0 && (mf[i]->IE == 1)){
+                if(strcmp(ExCate[mf[i]->category-1], search) == 0 && (mf[i]->IE == 1)){
                     if(pmonth != month || pday != day)
                         printf("%d월 %d일-------------------------------\n", month, day);
-                    printf("%3s %20s %10d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+                    printf("%3s %20s %10d\n", ExCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
                     pmonth = month;
                     pday = day;
                     find = 1;
@@ -325,7 +319,7 @@ void searchIncome(Moneyfolio *mf[], int total){         // 수입내역 검색 �
         if((strstr(mf[i]->note, search) != NULL) && (mf[i]->IE == 0)){
             if(pmonth != month || pday != day)
                 printf("%d월 %d일-------------------------------\n", month, day);
-            printf("%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%3s %20s %10d\n", InCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
             pmonth = month;
             pday = day;
             find = 1;
@@ -358,7 +352,7 @@ void searchExpense(Moneyfolio *mf[], int total){         // 지출내역 검색 
         if((strstr(mf[i]->note, search) != NULL) && (mf[i]->IE == 1)){
             if(pmonth != month || pday != day)
                 printf("%d월 %d일-------------------------------\n", month, day);
-            printf("%3s %20s %10d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%3s %20s %10d\n", ExCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
             pmonth = month;
             pday = day;
             find = 1;
@@ -390,9 +384,9 @@ void dayList(Moneyfolio *mf[], int total){     // 일일 내역 list
         if(pmonth != month || pday != day)
             printf("%d월 %d일-------------------------------\n", month, day);
         if(mf[i]->IE == 0)
-            printf("%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%3s %20s %10d\n", InCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
         else
-            printf("%3s %20s %10d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%3s %20s %10d\n", ExCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
         pmonth = month;
         pday = day;
     }
@@ -413,9 +407,9 @@ void monthList(Moneyfolio *mf[], int total){
         if(month != pmonth)
             printf("%d월-------------------------------\n", month);
         if(mf[i]->IE == 0)
-            printf("%d일 %3s %20s %10d\n", day, InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%d일 %3s %20s %10d\n", day, InCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
         else
-            printf("%d일 %3s %20s %10d\n", day, ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            printf("%d일 %3s %20s %10d\n", day, ExCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
         pmonth = month;
         pday = day;
     }
@@ -445,11 +439,11 @@ void save(Moneyfolio *mf[], int total){
         if(pmonth != month || pday != day)
             fprintf(file, "%d월 %d일-------------------------------\n", month, day);
         if(mf[i]->IE == 0){
-            fprintf(file, "%3s %20s %10d\n", InCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            fprintf(file, "%3s %20s %10d\n", InCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
             sum += mf[i]->price;
         }
         else{
-            fprintf(file, "%3s %20s %10d\n", ExCate[mf[i]->category], mf[i]->note, mf[i]->price);
+            fprintf(file, "%3s %20s %10d\n", ExCate[mf[i]->category-1], mf[i]->note, mf[i]->price);
             sum -= mf[i]->price;
         }
         pmonth = month;
